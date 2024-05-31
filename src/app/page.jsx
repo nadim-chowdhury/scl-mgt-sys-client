@@ -8,7 +8,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold">School Management System</h1>
           <nav className="flex space-x-4">
             <Link
-              href="#features"
+              href="/login"
               className="hover:underline px-6 py-1 rounded border"
             >
               Log in
@@ -24,9 +24,12 @@ export default function Home() {
         <p className="text-lg mb-8">
           Manage your school operations effortlessly and efficiently.
         </p>
-        <button className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700">
+        <Link
+          href="/register"
+          className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700"
+        >
           Get Started
-        </button>
+        </Link>
       </section>
 
       <section id="features" className="bg-white py-20">
@@ -69,9 +72,12 @@ export default function Home() {
           <p className="text-lg mb-4">
             Have any questions? Get in touch with us!
           </p>
-          <button className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700">
+          <Link
+            href="/contact"
+            className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-700"
+          >
             Contact Support
-          </button>
+          </Link>
         </div>
       </section>
 
