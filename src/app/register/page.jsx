@@ -76,7 +76,7 @@ export default function Register() {
               Register
             </button>
 
-            <div className="flex justify-center mt-2 text-sm">
+            <div className="flex justify-center mt-2 text-sm bg-blue-100 rounded-md py-2">
               <Link href="/" className="text-blue-500">
                 Return Home
               </Link>

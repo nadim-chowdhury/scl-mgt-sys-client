@@ -1,7 +1,10 @@
-import client from "@/lib/apolloClient";
+"use client";
+
+import { GET_STUDENTS } from "@/graphql/query";
+import { useQuery } from "@apollo/client";
 
 export default function AllStudents() {
-  const { loading, error, data } = useQuery(GET_STUDENTS, { client });
+  const { loading, error, data } = useQuery(GET_STUDENTS);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
