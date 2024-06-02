@@ -4,6 +4,7 @@ import { notifyError, notifySuccess } from "@/components/common/Notifications";
 import { LOGIN_MUTATION } from "@/graphql/mutation";
 import { useMutation } from "@apollo/client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export default function Login() {
@@ -13,12 +14,20 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
+  const router = useRouter();
+
   const [loginMutation, { data, loading, error }] = useMutation(LOGIN_MUTATION);
 
   const onSubmit = async (formData) => {
     try {
-      await loginMutation({ variables: formData });
-      notifySuccess("Logged in successfully!");
+      const { data } = await loginMutation({ variables: formData });
+      if (data && data.login) {
+        localStorage.setItem("scl-mgt-auth", data.login);
+        notifySuccess("Logged in successfully!");
+        router.push("/dashboard");
+      } else {
+        throw new Error("Invalid response from server");
+      }
     } catch (error) {
       notifyError("Login failed. Please try again.");
     }

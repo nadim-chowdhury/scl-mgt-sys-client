@@ -1,29 +1,67 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+import axios from "axios";
 
 export default NextAuth({
   providers: [
     Providers.Credentials({
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text" },
+        email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      authorize: async (credentials) => {
-        const user = { id: 1, name: "User", email: "user@example.com" };
-        return user ? Promise.resolve(user) : Promise.resolve(null);
+      async authorize(credentials) {
+        try {
+          const response = await axios.post(
+            "http://127.0.0.1:8000/graphql",
+            {
+              query: `
+              mutation Login($email: String!, $password: String!) {
+                login(email: $email, password: $password) {
+                  user {
+                    id
+                    name
+                    email
+                  }
+                  accessToken
+                }
+              }
+            `,
+              variables: {
+                email: credentials.email,
+                password: credentials.password,
+              },
+            }
+          );
+
+          const { data } = response;
+          const user = data.data.login;
+
+          if (user && user.accessToken) {
+            return user;
+          }
+
+          return null;
+        } catch (error) {
+          console.error("Login error:", error);
+          return null;
+        }
       },
     }),
   ],
-  session: {
-    jwt: true,
+  callbacks: {
+    async jwt(token, user) {
+      if (user) {
+        token.accessToken = user.accessToken;
+      }
+      return token;
+    },
+    async session(session, token) {
+      session.accessToken = token.accessToken;
+      return session;
+    },
   },
-  jwt: {},
   pages: {
-    signIn: "/auth/login",
-    signOut: "/auth/logout",
-    error: "/auth/error",
-    verifyRequest: "/auth/verify-request",
-    newUser: null,
+    signIn: "/login",
   },
 });
