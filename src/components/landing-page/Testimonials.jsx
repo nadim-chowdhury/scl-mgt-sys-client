@@ -1,4 +1,4 @@
-import { testimonials } from "@/utils/testimonials";
+import { testimonials } from "../../utils/testimonials";
 import Image from "next/image";
 
 export default function Testimonials() {

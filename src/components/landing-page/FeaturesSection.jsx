@@ -1,6 +1,6 @@
 "use client";
 
-import { features } from "@/utils/features";
+import { features } from "../../utils/features";
 import { useState } from "react";
 import { FaExpand } from "react-icons/fa";
 

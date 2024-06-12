@@ -1,7 +1,7 @@
 "use client";
 
-import { notifyError, notifySuccess } from "@/components/common/Notifications";
-import { REGISTER_MUTATION } from "@/graphql/mutation";
+import { notifyError, notifySuccess } from "../../components/common/Notifications";
+import { REGISTER_MUTATION } from "../../graphql/mutation";
 import { useMutation } from "@apollo/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

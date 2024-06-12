@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ApolloWrapper } from "@/lib/apollowrapper";
-import Notification from "@/components/common/Notifications";
+import { ApolloWrapper } from "../lib/apollowrapper";
+import Notification from "../components/common/Notifications";
 
 const inter = Inter({ subsets: ["latin"] });
 

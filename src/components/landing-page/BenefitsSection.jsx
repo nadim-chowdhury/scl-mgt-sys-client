@@ -1,4 +1,4 @@
-import { benefits } from "@/utils/benefits";
+import { benefits } from "../../utils/benefits";
 import Image from "next/image";
 
 export default function BenefitsSection() {

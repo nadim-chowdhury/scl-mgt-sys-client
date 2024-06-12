@@ -1,11 +1,12 @@
 "use client";
 
-import { notifyError, notifySuccess } from "@/components/common/Notifications";
-import { LOGIN_MUTATION } from "@/graphql/mutation";
+import { notifyError, notifySuccess } from "../../components/common/Notifications";
+import { LOGIN_MUTATION } from "../../graphql/mutation";
 import { useMutation } from "@apollo/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Login() {
   const {
@@ -24,7 +25,7 @@ export default function Login() {
       if (data && data.login) {
         localStorage.setItem("scl-mgt-auth", data.login);
         notifySuccess("Logged in successfully!");
-        router.push("/dashboard");
+        // router.push("/dashboard");
       } else {
         throw new Error("Invalid response from server");
       }
@@ -41,7 +42,8 @@ export default function Login() {
             Sign in to your account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+
+        <div className="mt-8 space-y-6">
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md  -space-y-px">
             <div>
@@ -121,7 +123,7 @@ export default function Login() {
           <div>
             <div className="flex items-center gap-2">
               <button
-                type="submit"
+                onClick={() => signIn()}
                 className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
               >
                 Log in
@@ -143,11 +145,11 @@ export default function Login() {
               </div>
             </Link>
           </div>
-        </form>
+        </div>
 
-        {loading && <p>Loading...</p>}
+        {/* {loading && <p>Loading...</p>}
         {error && <p>Error: {error.message}</p>}
-        {data && <p>Login successful: {data.login}</p>}
+        {data && <p>Login successful: {data.login}</p>} */}
       </div>
     </div>
   );
