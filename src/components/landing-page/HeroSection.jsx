@@ -8,7 +8,7 @@ export default function HeroSection() {
     >
       <Navbar />
 
-      <div className="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-50 text-white container mx-auto">
+      <div className="flex flex-col items-center justify-center min-h-[80vh] md:min-h-screen bg-black bg-opacity-50 text-white container mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center">
           Manage Your School Effortlessly
         </h1>
@@ -18,14 +18,14 @@ export default function HeroSection() {
         </p>
         <div className="space-x-4">
           <a
-            href="/sign-up"
-            className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
+            href="/register"
+            className="bg-amber-600 hover:bg-amber-700 text-white py-2 px-4 rounded"
           >
             Sign Up
           </a>
           <a
             href="/demo-request"
-            className="bg-transparent border border-white hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded"
+            className="bg-transparent border border-white hover:bg-white hover:text-black text-white py-2 px-4 rounded"
           >
             Request a Demo
           </a>

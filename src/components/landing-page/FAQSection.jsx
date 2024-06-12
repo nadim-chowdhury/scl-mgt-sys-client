@@ -52,12 +52,12 @@ export default function FAQSection() {
             Here are some common questions about our school management system.
           </p>
         </div>
-        
+
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq, index) => (
             <div key={index} className="mb-6">
               <button
-                className="flex items-center justify-between w-full py-4 px-6 bg-gray-100 rounded-lg  focus:outline-none"
+                className="flex items-center justify-between w-full py-4 px-6 bg-gray-100 rounded-lg focus:outline-none"
                 onClick={() => toggleAccordion(index)}
               >
                 <span className="text-lg font-semibold text-gray-900">

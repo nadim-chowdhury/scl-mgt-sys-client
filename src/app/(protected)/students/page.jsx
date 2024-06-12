@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/app/loading";
 import { GET_STUDENTS } from "@/graphql/query";
 import { useQuery } from "@apollo/client";
 import { Table } from "antd";
@@ -35,7 +36,7 @@ export default function AllStudents() {
       `Showing ${range[0]}-${range[1]} of ${total} items`,
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
