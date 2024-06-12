@@ -1,23 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, ConfigProvider, Layout, Menu, theme } from "antd";
 import { GiTeacher } from "react-icons/gi";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { MdSpaceDashboard } from "react-icons/md";
 import { FaHouseUser } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import AvatarWithLogout from "@/components/common/AvatarWithLogout";
 // import { signIn, signOut, useSession } from "next-auth/client";
 
 export default function RootLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const { Header, Sider, Content } = Layout;
-  const isLoggedIn = true;
   // const [session, loading] = useSession();
   const router = useRouter();
+  const pathname = usePathname();
+  console.log("🚀 ~ RootLayout ~ pathname:", pathname)
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -25,6 +28,23 @@ export default function RootLayout({ children }) {
   const handleMenuItemClick = (key) => {
     router.push(`/${key}`);
   };
+
+  const handleLogout = () => {
+    console.log("Logout clicked");
+    localStorage.removeItem("scl-mgt-auth");
+    router.push("/");
+  };
+
+  // useEffect(() => {
+  //   const authData = localStorage.getItem("scl-mgt-auth");
+  //   console.log("🚀 ~ useEffect ~ authData:", authData);
+
+  //   if (authData) {
+  //     setIsLoggedIn(true);
+  //   } else {
+  //     setIsLoggedIn(false);
+  //   }
+  // }, [pathname]);
 
   return (
     <ConfigProvider
@@ -82,6 +102,7 @@ export default function RootLayout({ children }) {
               padding: 0,
               background: colorBgContainer,
             }}
+            className="flex items-center justify-between"
           >
             <Button
               type="text"
@@ -93,6 +114,8 @@ export default function RootLayout({ children }) {
                 height: 64,
               }}
             />
+
+            <AvatarWithLogout username="John Doe" onLogout={handleLogout} />
           </Header>
 
           <Content
