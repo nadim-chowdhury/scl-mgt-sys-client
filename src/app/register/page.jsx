@@ -36,7 +36,7 @@ export default function Register() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg">
         <div className="text-center">
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
             Create your account
@@ -44,7 +44,7 @@ export default function Register() {
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md  -space-y-px">
             <div>
               <label htmlFor="name" className="sr-only">
                 Name
@@ -54,7 +54,7 @@ export default function Register() {
                 name="name"
                 type="text"
                 {...register("name", { required: "Name is required" })}
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm"
                 placeholder="Name"
               />
               {errors.name && (
@@ -80,7 +80,7 @@ export default function Register() {
                   },
                 })}
                 autoComplete="email"
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
               {errors.email && (
@@ -98,7 +98,7 @@ export default function Register() {
                 id="role"
                 name="role"
                 {...register("role", { required: "Role is required" })}
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm cursor-pointer"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm cursor-pointer"
               >
                 <option value="">Select role</option>
                 <option value="teacher">Teacher</option>
@@ -122,7 +122,7 @@ export default function Register() {
                 type="password"
                 {...register("password", { required: "Password is required" })}
                 autoComplete="current-password"
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
               {errors.password && (
@@ -146,7 +146,7 @@ export default function Register() {
                     value === password.current || "Passwords do not match",
                 })}
                 autoComplete="current-password"
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm"
                 placeholder="Confirm Password"
               />
               {errors.confirmPassword && (
@@ -158,18 +158,29 @@ export default function Register() {
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md group hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              Register
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="submit"
+                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+              >
+                Register
+              </button>
 
-            <div className="flex justify-center mt-2 text-sm bg-blue-100 rounded-md py-2">
-              <Link href="/" className="text-blue-500">
-                Return Home
+              <Link href="/login">
+                <button
+                  type="button"
+                  className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 text-nowrap"
+                >
+                  Log in
+                </button>
               </Link>
             </div>
+
+            <Link href="/" className="text-white">
+              <div className="flex justify-center mt-2 text-sm bg-amber-700 rounded-md py-2">
+                Return Home
+              </div>
+            </Link>
           </div>
         </form>
       </div>
