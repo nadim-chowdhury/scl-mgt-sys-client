@@ -11,15 +11,17 @@ const handler = NextAuth({
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
+        console.log("🚀 ~ authorize ~ credentials:", credentials);
+
         try {
-          const data = await graphqlClient.request(LOGIN_MUTATION, {
+          const res = await graphqlClient.request(LOGIN_MUTATION, {
             email: credentials.email,
             password: credentials.password,
           });
-          console.log("🚀 ~ authorize ~ data:", data);
+          console.log("🚀 ~ authorize ~ login:", res);
 
-          const user = data.user;
+          const user = res.login;
 
           if (user) {
             return user;
@@ -34,18 +36,15 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      return true;
+    async signIn({ user }) {
+      return !!user;
     },
-    // async redirect({ url, baseUrl }) {
-    //   return baseUrl;
-    // },
-    async session({ session, user, token }) {
+    async session({ session, token }) {
       session.user.id = token.id;
       session.user.email = token.email;
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -53,17 +52,14 @@ const handler = NextAuth({
       return token;
     },
   },
-  // pages: {
-  //   signIn: "/auth/signin",
-  //   signOut: "/auth/signout",
-  //   error: "/auth/error", // Error code passed in query string as ?error=
-  //   verifyRequest: "/auth/verify-request", // (used for check email message)
-  //   newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
-  // },
+  pages: {
+    signIn: "/dashboard",
+    signOut: "/",
+  },
   session: {
     jwt: true,
   },
-  // debug: process.env.NODE_ENV === "development",
+  debug: process.env.NODE_ENV === "development",
 });
 
 export { handler as GET, handler as POST };

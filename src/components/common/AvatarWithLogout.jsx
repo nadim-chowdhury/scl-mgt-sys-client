@@ -11,7 +11,7 @@ const AvatarWithLogout = ({ username, onLogout }) => {
   );
 
   return (
-    <Dropdown overlay={menu} trigger={["click"]}>
+    <Dropdown menu={menu} trigger={["click"]}>
       <div
         style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
         className="px-4"
