@@ -1,53 +1,69 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import verifyUser from "../../../../lib/auth"; // Import your custom verification logic
+import { LOGIN_MUTATION } from "../../../../graphql/mutation";
+import graphqlClient from "../../../../lib/graphqlClient";
 
-export default NextAuth({
+const handler = NextAuth({
   providers: [
     CredentialsProvider({
-      // The name to display on the sign-in form (e.g., 'Sign in with...')
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      authorize: async (credentials) => {
-        // Implement your own logic to verify user credentials
-        const user = await verifyUser(credentials.email, credentials.password);
+      async authorize(credentials, req) {
+        try {
+          const data = await graphqlClient.request(LOGIN_MUTATION, {
+            email: credentials.email,
+            password: credentials.password,
+          });
+          console.log("🚀 ~ authorize ~ data:", data);
 
-        if (user) {
-          // Return user object if successful
-          return Promise.resolve(user);
-        } else {
-          // Return null if user data could not be retrieved
-          return Promise.resolve(null);
+          const user = data.user;
+
+          if (user) {
+            return user;
+          } else {
+            return null;
+          }
+        } catch (error) {
+          console.error("Error fetching user:", error);
+          return null;
         }
       },
     }),
   ],
-  pages: {
-    // signIn: "/auth/signin", // Custom sign-in page
-    // signOut: "/auth/signout", // Custom sign-out page
-    // error: "/auth/error", // Error page
-    // verifyRequest: "/auth/verify-request", // Verification page
-    // newUser: "/auth/new-user", // New user redirect
-  },
-  session: {
-    jwt: true,
-  },
   callbacks: {
-    async jwt(token, user) {
+    async signIn({ user, account, profile, email, credentials }) {
+      return true;
+    },
+    // async redirect({ url, baseUrl }) {
+    //   return baseUrl;
+    // },
+    async session({ session, user, token }) {
+      session.user.id = token.id;
+      session.user.email = token.email;
+      return session;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
       }
       return token;
     },
-    async session(session, token) {
-      session.user.id = token.id;
-      session.user.email = token.email;
-      return session;
-    },
   },
-  debug: process.env.NODE_ENV === "development",
+  // pages: {
+  //   signIn: "/auth/signin",
+  //   signOut: "/auth/signout",
+  //   error: "/auth/error", // Error code passed in query string as ?error=
+  //   verifyRequest: "/auth/verify-request", // (used for check email message)
+  //   newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
+  // },
+  session: {
+    jwt: true,
+  },
+  // debug: process.env.NODE_ENV === "development",
 });
+
+export { handler as GET, handler as POST };
