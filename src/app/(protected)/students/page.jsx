@@ -1,7 +1,7 @@
 "use client";
 
-import Loading from "@/app/loading";
-import { GET_STUDENTS } from "@/graphql/query";
+import Loading from "../../../app/loading";
+import { GET_STUDENTS } from "../../../graphql/query";
 import { useQuery } from "@apollo/client";
 import { Table } from "antd";
 

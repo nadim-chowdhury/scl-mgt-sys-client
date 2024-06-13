@@ -9,7 +9,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { FaHouseUser } from "react-icons/fa";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import AvatarWithLogout from "@/components/common/AvatarWithLogout";
+import AvatarWithLogout from "../../components/common/AvatarWithLogout";
 // import { signIn, signOut, useSession } from "next-auth/client";
 
 export default function RootLayout({ children }) {
@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   // const [session, loading] = useSession();
   const router = useRouter();
   const pathname = usePathname();
-  console.log("🚀 ~ RootLayout ~ pathname:", pathname)
+  console.log("🚀 ~ RootLayout ~ pathname:", pathname);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
