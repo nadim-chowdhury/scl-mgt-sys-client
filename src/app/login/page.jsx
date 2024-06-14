@@ -162,3 +162,39 @@ export default function Login() {
     </div>
   );
 }
+
+// import { useState } from 'react';
+// import { useMutation, gql } from '@apollo/client';
+// import { useRouter } from 'next/router';
+
+// const LOGIN_USER = gql`
+//   mutation Login($username: String!, $password: String!) {
+//     login(username: $username, password: $password)
+//   }
+// `;
+
+// export default function Login() {
+//   const [username, setUsername] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [login] = useMutation(LOGIN_USER);
+//   const router = useRouter();
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const { data } = await login({ variables: { username, password } });
+//       localStorage.setItem('token', data.login);
+//       router.push('/profile');
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+//       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+//       <button type="submit">Login</button>
+//     </form>
+//   );
+// }

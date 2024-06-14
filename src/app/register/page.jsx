@@ -1,6 +1,9 @@
 "use client";
 
-import { notifyError, notifySuccess } from "../../components/common/Notifications";
+import {
+  notifyError,
+  notifySuccess,
+} from "../../components/common/Notifications";
 import { REGISTER_MUTATION } from "../../graphql/mutation";
 import { useMutation } from "@apollo/client";
 import Link from "next/link";
@@ -187,3 +190,47 @@ export default function Register() {
     </div>
   );
 }
+
+// import { useState } from 'react';
+// import { useMutation, gql } from '@apollo/client';
+// import { useRouter } from 'next/router';
+
+// const REGISTER_USER = gql`
+//   mutation Register($username: String!, $password: String!, $role: String!) {
+//     register(username: $username, password: $password, role: $role) {
+//       id
+//       username
+//     }
+//   }
+// `;
+
+// export default function Register() {
+//   const [username, setUsername] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [role, setRole] = useState('student');
+//   const [register] = useMutation(REGISTER_USER);
+//   const router = useRouter();
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       await register({ variables: { username, password, role } });
+//       router.push('/login');
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+//       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+//       <select value={role} onChange={(e) => setRole(e.target.value)}>
+//         <option value="student">Student</option>
+//         <option value="teacher">Teacher</option>
+//         <option value="admin">Admin</option>
+//       </select>
+//       <button type="submit">Register</button>
+//     </form>
+//   );
+// }
