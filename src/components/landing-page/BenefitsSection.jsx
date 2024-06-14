@@ -28,7 +28,7 @@ export default function BenefitsSection() {
                 width={1280}
                 height={720}
               />
-              <h3 className="text-xl font-bold text-amber-500 mb-2">
+              <h3 className="text-xl font-bold text-indigo-500 mb-2">
                 {benefit.title}
               </h3>
               <p className="text-gray-600">{benefit.description}</p>

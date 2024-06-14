@@ -25,7 +25,7 @@ export default function page() {
                 name="name"
                 type="text"
                 required
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Name"
               />
             </div>
@@ -39,7 +39,7 @@ export default function page() {
                 type="email"
                 autoComplete="email"
                 required
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
             </div>
@@ -52,7 +52,7 @@ export default function page() {
                 name="message"
                 rows="4"
                 required
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Your message"
               ></textarea>
             </div>
@@ -61,13 +61,13 @@ export default function page() {
           <div>
             <button
               type="submit"
-              className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-500 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-500 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Send Message
             </button>
 
-            <div className="flex justify-center mt-2 text-sm bg-amber-700 rounded-md py-2">
-              <Link href="/" className="bg-amber-500">
+            <div className="flex justify-center mt-2 text-sm bg-indigo-700 rounded-md py-2">
+              <Link href="/" className="bg-indigo-500">
                 Return Home
               </Link>
             </div>
@@ -101,7 +101,7 @@ export default function page() {
           LinkedIn
         </Link>
         <Link
-          className="bg-amber-500 hover:bg-amber-700 text-white rounded px-6 py-2"
+          className="bg-indigo-500 hover:bg-indigo-700 text-white rounded px-6 py-2"
           href="https://www.twitter.com/nadim_ch0wdhury"
         >
           Twitter

@@ -26,7 +26,7 @@ export default function FeaturesSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature) => (
             <div key={feature.id} className="bg-gray-100 rounded-lg  p-6">
-              <div className="flex items-center justify-center mb-4 text-amber-500">
+              <div className="flex items-center justify-center mb-4 text-indigo-500">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">
@@ -38,7 +38,7 @@ export default function FeaturesSection() {
               <div className="flex items-center justify-center">
                 <button
                   onClick={() => handleToggle(feature.id)}
-                  className="flex items-center justify-center text-amber-500 hover:text-amber-700 focus:outline-none"
+                  className="flex items-center justify-center text-indigo-500 hover:text-indigo-700 focus:outline-none"
                 >
                   {expandedFeature === feature.id ? "Show Less" : "Show More"}
                   <FaExpand className="ml-2" />

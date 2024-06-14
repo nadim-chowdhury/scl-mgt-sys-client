@@ -1,39 +1,29 @@
 "use client";
 
-import {
-  notifyError,
-  notifySuccess,
-} from "../../components/common/Notifications";
-import { REGISTER_MUTATION } from "../../graphql/mutation";
-import { useMutation } from "@apollo/client";
-import Link from "next/link";
+import { useState } from "react";
+import { useMutation, gql } from "@apollo/client";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
-import { useForm } from "react-hook-form";
+import { REGISTER_USER } from "../../graphql/mutation";
+import Link from "next/link";
 
 export default function Register() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
 
-  const [registerMutation, { data, loading, error }] =
-    useMutation(REGISTER_MUTATION);
+  const [register] = useMutation(REGISTER_USER);
 
   const router = useRouter();
-  const password = useRef({});
-  password.current = watch("password", "");
 
-  const onSubmit = async (formData) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      await registerMutation({ variables: formData });
-      notifySuccess("Registered successfully!");
+      await register({
+        variables: { createUserInput: { username, password, role } },
+      });
       router.push("/login");
-    } catch (error) {
-      console.error("onSubmit ~ error:", error);
-      notifyError("Registration failed. Please try again.");
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -46,73 +36,21 @@ export default function Register() {
           </h2>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="rounded-md  -space-y-px">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="name" className="sr-only">
-                Name
+              <label htmlFor="username" className="sr-only">
+                Username
               </label>
               <input
-                id="name"
-                name="name"
+                id="username"
+                name="username"
                 type="text"
-                {...register("name", { required: "Name is required" })}
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm"
-                placeholder="Name"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Username"
               />
-              {errors.name && (
-                <span className="text-red-500 text-sm">
-                  {errors.name.message}
-                </span>
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                    message: "Invalid email address",
-                  },
-                })}
-                autoComplete="email"
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-              />
-              {errors.email && (
-                <span className="text-red-500 text-sm">
-                  {errors.email.message}
-                </span>
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="role" className="sr-only">
-                Role
-              </label>
-              <select
-                id="role"
-                name="role"
-                {...register("role", { required: "Role is required" })}
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm cursor-pointer"
-              >
-                <option value="">Select role</option>
-                <option value="teacher">Teacher</option>
-                <option value="student">Student</option>
-                <option value="parent">Parent</option>
-              </select>
-              {errors.role && (
-                <span className="text-red-500 text-sm">
-                  {errors.role.message}
-                </span>
-              )}
             </div>
 
             <div>
@@ -123,40 +61,28 @@ export default function Register() {
                 id="password"
                 name="password"
                 type="password"
-                {...register("password", { required: "Password is required" })}
-                autoComplete="current-password"
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
-              {errors.password && (
-                <span className="text-red-500 text-sm">
-                  {errors.password.message}
-                </span>
-              )}
             </div>
 
             <div>
-              <label htmlFor="confirm-password" className="sr-only">
-                Confirm Password
+              <label htmlFor="role" className="sr-only">
+                Role
               </label>
-              <input
-                id="confirm-password"
-                name="confirm-password"
-                type="password"
-                {...register("confirmPassword", {
-                  required: "Please confirm your password",
-                  validate: (value) =>
-                    value === password.current || "Passwords do not match",
-                })}
-                autoComplete="current-password"
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:border-amber-500 focus:z-10 sm:text-sm"
-                placeholder="Confirm Password"
-              />
-              {errors.confirmPassword && (
-                <span className="text-red-500 text-sm">
-                  {errors.confirmPassword.message}
-                </span>
-              )}
+              <select
+                id="role"
+                name="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm cursor-pointer"
+              >
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="parent">Parent</option>
+              </select>
             </div>
           </div>
 
@@ -164,7 +90,7 @@ export default function Register() {
             <div className="flex items-center gap-2">
               <button
                 type="submit"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
               >
                 Register
               </button>
@@ -172,7 +98,7 @@ export default function Register() {
               <Link href="/login">
                 <button
                   type="button"
-                  className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 text-nowrap"
+                  className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap"
                 >
                   Log in
                 </button>
@@ -180,7 +106,7 @@ export default function Register() {
             </div>
 
             <Link href="/" className="text-white">
-              <div className="flex justify-center mt-2 text-sm bg-amber-700 rounded-md py-2">
+              <div className="flex justify-center mt-2 text-sm bg-indigo-700 rounded-md py-2">
                 Return Home
               </div>
             </Link>
@@ -190,47 +116,3 @@ export default function Register() {
     </div>
   );
 }
-
-// import { useState } from 'react';
-// import { useMutation, gql } from '@apollo/client';
-// import { useRouter } from 'next/router';
-
-// const REGISTER_USER = gql`
-//   mutation Register($username: String!, $password: String!, $role: String!) {
-//     register(username: $username, password: $password, role: $role) {
-//       id
-//       username
-//     }
-//   }
-// `;
-
-// export default function Register() {
-//   const [username, setUsername] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [role, setRole] = useState('student');
-//   const [register] = useMutation(REGISTER_USER);
-//   const router = useRouter();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       await register({ variables: { username, password, role } });
-//       router.push('/login');
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-//       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//       <select value={role} onChange={(e) => setRole(e.target.value)}>
-//         <option value="student">Student</option>
-//         <option value="teacher">Teacher</option>
-//         <option value="admin">Admin</option>
-//       </select>
-//       <button type="submit">Register</button>
-//     </form>
-//   );
-// }

@@ -57,7 +57,7 @@ export default function Navbar() {
           open={isDrawerVisible}
           width={220}
           extra={
-            <Button onClick={closeDrawer} className="bg-amber-600 text-white">
+            <Button onClick={closeDrawer} className="bg-indigo-600 text-white">
               <CloseCircleOutlined />
             </Button>
           }
@@ -89,7 +89,7 @@ export default function Navbar() {
               </span>
             </Link>
             <Link href="/register">
-              <span className="block text-center bg-amber-600 text-white py-2 mt-2 rounded-md hover:bg-amber-700">
+              <span className="block text-center bg-indigo-600 text-white py-2 mt-2 rounded-md hover:bg-indigo-700">
                 Register
               </span>
             </Link>
@@ -127,7 +127,7 @@ export default function Navbar() {
             <span className="text-white py-2 font-medium text-sm">Log In</span>
           </Link>
           <Link href="/register">
-            <span className="bg-amber-600 text-white py-2 px-4 text-sm font-medium rounded-md hover:bg-amber-700">
+            <span className="bg-indigo-600 text-white py-2 px-4 text-sm font-medium rounded-md hover:bg-indigo-700">
               Register
             </span>
           </Link>
