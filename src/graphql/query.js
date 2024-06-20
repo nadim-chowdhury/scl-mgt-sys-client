@@ -191,3 +191,102 @@ export const GET_PAYMENT_HISTORY = gql`
     }
   }
 `;
+
+export const GET_COURSES = gql`
+  query GetCourses {
+    courses {
+      id
+      name
+      description
+      assignments {
+        id
+        title
+        dueDate
+      }
+    }
+  }
+`;
+
+export const GET_ASSIGNMENTS = gql`
+  query GetAssignments {
+    assignments {
+      id
+      title
+      description
+      dueDate
+      course {
+        name
+      }
+      submissions {
+        id
+        content
+        submittedAt
+        grade
+        feedback
+        student {
+          username
+        }
+      }
+    }
+  }
+`;
+
+export const GET_SUBMISSIONS = gql`
+  query GetSubmissions {
+    submissions {
+      id
+      content
+      submittedAt
+      assignment {
+        title
+      }
+      student {
+        username
+      }
+    }
+  }
+`;
+
+export const GET_VIRTUAL_CLASSES = gql`
+  query GetVirtualClasses {
+    virtualClasses {
+      id
+      meetingLink
+      schedule
+      course {
+        name
+      }
+    }
+  }
+`;
+
+export const GET_ACADEMIC_PERFORMANCE_REPORT = gql`
+  query GetAcademicPerformanceReport($courseId: Int!) {
+    academicPerformanceReport(courseId: $courseId) {
+      assignmentTitle
+      submissions
+      averageScore
+    }
+  }
+`;
+
+export const GET_ATTENDANCE_REPORT = gql`
+  query GetAttendanceReport {
+    attendanceReport {
+      student
+      class
+      date
+      status
+    }
+  }
+`;
+
+export const GET_FINANCIAL_REPORT = gql`
+  query GetFinancialReport {
+    financialReport {
+      totalFees
+      totalPayments
+      outstandingAmount
+    }
+  }
+`;

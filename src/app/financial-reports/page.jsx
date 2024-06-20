@@ -1,10 +1,10 @@
-"use client";
+import { useQuery, gql } from "@apollo/client";
+import { Pie } from "react-chartjs-2";
+import "chart.js/auto";
+import { GET_FINANCIAL_REPORT } from "@/graphql/query";
 
-import { GET_FEES_AND_PAYMENTS } from "@/graphql/query";
-import { useQuery } from "@apollo/client";
-
-export default function FinancialReports() {
-  const { loading, error, data } = useQuery(GET_FEES_AND_PAYMENTS);
+export default function FinancialReport() {
+  const { loading, error, data } = useQuery(GET_FINANCIAL_REPORT);
 
   if (loading) return <p className="text-center mt-4">Loading...</p>;
   if (error)
@@ -12,67 +12,44 @@ export default function FinancialReports() {
       <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
     );
 
-  const totalFees = data.fees.reduce((sum, fee) => sum + fee.amount, 0);
-  const totalPayments = data.payments.reduce(
-    (sum, payment) => sum + payment.amount,
-    0
-  );
+  const chartData = {
+    labels: ["Total Fees", "Total Payments", "Outstanding Amount"],
+    datasets: [
+      {
+        label: "Financial Data",
+        data: [
+          data.financialReport.totalFees,
+          data.financialReport.totalPayments,
+          data.financialReport.outstandingAmount,
+        ],
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(54, 162, 235, 0.6)",
+          "rgba(255, 206, 86, 0.6)",
+        ],
+      },
+    ],
+  };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Financial Reports</h1>
-      <h2 className="text-2xl font-semibold mb-4">
-        Total Fees: ${totalFees.toFixed(2)}
-      </h2>
-      <h2 className="text-2xl font-semibold mb-6">
-        Total Payments: ${totalPayments.toFixed(2)}
-      </h2>
-
+    <div className="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-md">
+      <h1 className="text-3xl font-bold mb-6 text-center">Financial Report</h1>
       <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">Fees</h3>
-        <ul className="space-y-4">
-          {data.fees.map((fee) => (
-            <li key={fee.id} className="p-4 border border-gray-300 rounded">
-              <p>
-                <strong>User:</strong> {fee.user.username}
-              </p>
-              <p>
-                <strong>Amount:</strong> ${fee.amount.toFixed(2)}
-              </p>
-              <p>
-                <strong>Due:</strong> {fee.dueDate}
-              </p>
-              <p>
-                <strong>Status:</strong> {fee.status}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <Pie data={chartData} />
       </div>
-
-      <div>
-        <h3 className="text-xl font-semibold mb-4">Payments</h3>
-        <ul className="space-y-4">
-          {data.payments.map((payment) => (
-            <li key={payment.id} className="p-4 border border-gray-300 rounded">
-              <p>
-                <strong>Fee:</strong> ${payment.fee.amount.toFixed(2)}
-              </p>
-              <p>
-                <strong>User:</strong> {payment.fee.user.username}
-              </p>
-              <p>
-                <strong>Amount:</strong> ${payment.amount.toFixed(2)}
-              </p>
-              <p>
-                <strong>Date:</strong> {payment.paymentDate}
-              </p>
-              <p>
-                <strong>Method:</strong> {payment.method}
-              </p>
-            </li>
-          ))}
-        </ul>
+      <div className="text-lg space-y-2">
+        <p>
+          <strong>Total Fees:</strong> $
+          {data.financialReport.totalFees.toFixed(2)}
+        </p>
+        <p>
+          <strong>Total Payments:</strong> $
+          {data.financialReport.totalPayments.toFixed(2)}
+        </p>
+        <p>
+          <strong>Outstanding Amount:</strong> $
+          {data.financialReport.outstandingAmount.toFixed(2)}
+        </p>
       </div>
     </div>
   );

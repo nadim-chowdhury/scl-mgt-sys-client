@@ -163,3 +163,97 @@ export const CREATE_INVOICE = gql`
     }
   }
 `;
+
+export const CREATE_COURSE = gql`
+  mutation CreateCourse($name: String!, $description: String!) {
+    createCourse(name: $name, description: $description) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+export const CREATE_ASSIGNMENT = gql`
+  mutation CreateAssignment(
+    $title: String!
+    $description: String!
+    $dueDate: String!
+    $courseId: Int!
+  ) {
+    createAssignment(
+      title: $title
+      description: $description
+      dueDate: $dueDate
+      courseId: $courseId
+    ) {
+      id
+      title
+      description
+      dueDate
+    }
+  }
+`;
+
+export const GRADE_SUBMISSION = gql`
+  mutation GradeSubmission(
+    $submissionId: Int!
+    $grade: Int!
+    $feedback: String!
+  ) {
+    gradeSubmission(
+      submissionId: $submissionId
+      grade: $grade
+      feedback: $feedback
+    ) {
+      id
+      grade
+      feedback
+    }
+  }
+`;
+
+export const CREATE_SUBMISSION = gql`
+  mutation CreateSubmission(
+    $content: String!
+    $assignmentId: Int!
+    $studentId: Int!
+  ) {
+    createSubmission(
+      content: $content
+      assignmentId: $assignmentId
+      studentId: $studentId
+    ) {
+      id
+      content
+      submittedAt
+    }
+  }
+`;
+
+export const CREATE_VIRTUAL_CLASS = gql`
+  mutation CreateVirtualClass(
+    $meetingLink: String!
+    $schedule: String!
+    $courseId: Int!
+  ) {
+    createVirtualClass(
+      meetingLink: $meetingLink
+      schedule: $schedule
+      courseId: $courseId
+    ) {
+      id
+      meetingLink
+      schedule
+    }
+  }
+`;
+
+export const UPDATE_SCHEDULE = gql`
+  mutation UpdateSchedule($id: Int!, $schedule: String!) {
+    updateSchedule(id: $id, schedule: $schedule) {
+      id
+      schedule
+    }
+  }
+`;
