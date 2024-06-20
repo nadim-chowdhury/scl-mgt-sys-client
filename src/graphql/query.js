@@ -88,3 +88,106 @@ export const GET_MESSAGES = gql`
     }
   }
 `;
+
+export const GET_ANNOUNCEMENTS = gql`
+  query GetAnnouncements {
+    announcements {
+      id
+      title
+      content
+      createdAt
+    }
+  }
+`;
+
+export const GET_FEES = gql`
+  query GetFees {
+    fees {
+      id
+      amount
+      dueDate
+      status
+      user {
+        username
+      }
+    }
+  }
+`;
+
+export const GET_PAYMENTS = gql`
+  query GetPayments {
+    payments {
+      id
+      amount
+      paymentDate
+      method
+      fee {
+        amount
+        user {
+          username
+        }
+      }
+    }
+  }
+`;
+
+export const GET_FEES_AND_PAYMENTS = gql`
+  query GetFeesAndPayments {
+    fees {
+      id
+      amount
+      dueDate
+      status
+      user {
+        username
+      }
+    }
+    payments {
+      id
+      amount
+      paymentDate
+      method
+      fee {
+        amount
+        user {
+          username
+        }
+      }
+    }
+  }
+`;
+
+export const GET_INVOICES = gql`
+  query GetInvoices {
+    invoices {
+      id
+      amount
+      generatedAt
+      user {
+        username
+      }
+      payment {
+        id
+        amount
+      }
+    }
+  }
+`;
+
+export const GET_PAYMENT_HISTORY = gql`
+  query GetPayments {
+    payments {
+      id
+      amount
+      paymentDate
+      method
+      fee {
+        id
+        amount
+        user {
+          username
+        }
+      }
+    }
+  }
+`;

@@ -111,3 +111,55 @@ export const SEND_MESSAGE = gql`
     }
   }
 `;
+
+export const CREATE_ANNOUNCEMENT = gql`
+  mutation CreateAnnouncement($title: String!, $content: String!) {
+    createAnnouncement(title: $title, content: $content) {
+      id
+      title
+      content
+      createdAt
+    }
+  }
+`;
+
+export const CREATE_FEE = gql`
+  mutation CreateFee($userId: Int!, $amount: Float!, $dueDate: String!) {
+    createFee(userId: $userId, amount: $amount, dueDate: $dueDate) {
+      id
+      amount
+      dueDate
+      status
+    }
+  }
+`;
+
+export const UPDATE_FEE_STATUS = gql`
+  mutation UpdateFeeStatus($id: Int!, $status: String!) {
+    updateFeeStatus(id: $id, status: $status) {
+      id
+      status
+    }
+  }
+`;
+
+export const CREATE_PAYMENT = gql`
+  mutation CreatePayment($feeId: Int!, $amount: Float!, $method: String!) {
+    createPayment(feeId: $feeId, amount: $amount, method: $method) {
+      id
+      amount
+      paymentDate
+      method
+    }
+  }
+`;
+
+export const CREATE_INVOICE = gql`
+  mutation CreateInvoice($userId: Int!, $paymentId: Int!, $amount: Float!) {
+    createInvoice(userId: $userId, paymentId: $paymentId, amount: $amount) {
+      id
+      amount
+      generatedAt
+    }
+  }
+`;

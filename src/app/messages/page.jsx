@@ -6,11 +6,12 @@ import socket from "../../lib/socket";
 import { GET_MESSAGES } from "../../graphql/query";
 
 export default function Messages() {
-  const { loading, error, data, refetch } = useQuery(GET_MESSAGES);
   const [messages, setMessages] = useState([]);
   const [senderId, setSenderId] = useState("");
   const [receiverId, setReceiverId] = useState("");
   const [content, setContent] = useState("");
+
+  const { loading, error, data, refetch } = useQuery(GET_MESSAGES);
 
   useEffect(() => {
     if (data) {
