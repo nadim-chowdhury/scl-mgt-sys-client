@@ -24,7 +24,7 @@ export const GET_CLASSES = gql`
   query GetClasses {
     classes {
       id
-      username
+      name
       teacher {
         username
       }

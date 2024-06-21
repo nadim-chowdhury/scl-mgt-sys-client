@@ -1,7 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import { CREATE_FEE, UPDATE_FEE_STATUS } from "@/graphql/mutation";
-import { GET_FEES } from "@/graphql/query";
+import { CREATE_FEE, UPDATE_FEE_STATUS } from "../../graphql/mutation";
+import { GET_FEES } from "../../graphql/query";
 
 export default function Fees() {
   const [userId, setUserId] = useState("");
