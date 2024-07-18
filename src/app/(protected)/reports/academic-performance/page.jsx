@@ -1,17 +1,10 @@
-import { useQuery } from "@apollo/client";
+"use client";
+
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
-
-const GET_ACADEMIC_PERFORMANCE_REPORT = gql`
-  query GetAcademicPerformanceReport($courseId: Int!) {
-    academicPerformanceReport(courseId: $courseId) {
-      assignmentTitle
-      submissions
-      averageScore
-    }
-  }
-`;
+import { GET_ACADEMIC_PERFORMANCE_REPORT } from "@/graphql/query";
 
 export default function AcademicPerformanceReport() {
   const [courseId, setCourseId] = useState("");

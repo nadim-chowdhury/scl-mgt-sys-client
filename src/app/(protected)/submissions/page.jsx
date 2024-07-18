@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_SUBMISSIONS } from "../../../graphql/query";
 import { CREATE_SUBMISSION } from "@/graphql/mutation";
+import { GET_SUBMISSIONS } from "@/graphql/query";
 
 export default function Submissions() {
   const [content, setContent] = useState("");

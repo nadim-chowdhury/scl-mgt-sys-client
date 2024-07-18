@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { MARK_ATTENDANCE } from "../../../graphql/mutation";
 import { useMutation } from "@apollo/client";
+import { MARK_ATTENDANCE } from "@/graphql/mutation";
 
 export default function MarkAttendance() {
   const [classId, setClassId] = useState("");

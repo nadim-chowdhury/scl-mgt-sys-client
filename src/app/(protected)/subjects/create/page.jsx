@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { CREATE_SUBJECT } from "../../../graphql/mutation";
 import { useMutation } from "@apollo/client";
+import { CREATE_SUBJECT } from "@/graphql/mutation";
 
 export default function CreateSubject() {
   const [name, setName] = useState("");

@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import { useQuery, useMutation, gql } from "@apollo/client";
-import { GET_PAYMENTS } from "../../../graphql/query";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_PAYMENTS } from "@/graphql/query";
 import { CREATE_PAYMENT } from "@/graphql/mutation";
 
 export default function Payments() {

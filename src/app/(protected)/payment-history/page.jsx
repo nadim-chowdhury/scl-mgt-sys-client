@@ -1,5 +1,7 @@
-import { GET_PAYMENT_HISTORY } from "../../../graphql/query";
+"use client";
+
 import { useQuery } from "@apollo/client";
+import { GET_PAYMENT_HISTORY } from "@/graphql/query";
 
 export default function PaymentHistory() {
   const { loading, error, data } = useQuery(GET_PAYMENT_HISTORY);

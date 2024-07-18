@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@apollo/client";
-import { GET_TIMETABLES } from "../../graphql/query";
+import { GET_TIMETABLES } from "@/graphql/query";
 
 export default function Timetable() {
   const { loading, error, data } = useQuery(GET_TIMETABLES);

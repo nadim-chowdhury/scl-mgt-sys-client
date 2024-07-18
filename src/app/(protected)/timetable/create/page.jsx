@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { CREATE_TIMETABLE } from "../../../graphql/mutation";
 import { useMutation } from "@apollo/client";
+import { CREATE_TIMETABLE } from "@/graphql/mutation";
 
 export default function CreateTimeTable() {
   const [classId, setClassId] = useState("");

@@ -1,16 +1,9 @@
+"use client";
+
 import { useQuery } from "@apollo/client";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
-
-const GET_FINANCIAL_REPORT = gql`
-  query GetFinancialReport {
-    financialReport {
-      totalFees
-      totalPayments
-      outstandingAmount
-    }
-  }
-`;
+import { GET_FINANCIAL_REPORT } from "@/graphql/query";
 
 export default function FinancialReport() {
   const { loading, error, data } = useQuery(GET_FINANCIAL_REPORT);

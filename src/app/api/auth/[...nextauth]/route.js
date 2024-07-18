@@ -1,22 +1,22 @@
+import { LOGIN_USER } from "@/graphql/mutation";
+import graphqlClient from "@/lib/graphqlClient";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { LOGIN_MUTATION } from "../../../../graphql/mutation";
-import graphqlClient from "../../../../lib/graphqlClient";
 
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text" },
+        username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         console.log("🚀 ~ authorize ~ credentials:", credentials);
 
         try {
-          const res = await graphqlClient.request(LOGIN_MUTATION, {
-            email: credentials.email,
+          const res = await graphqlClient.request(LOGIN_USER, {
+            username: credentials.username,
             password: credentials.password,
           });
           console.log("🚀 ~ authorize ~ login:", res);
@@ -41,13 +41,13 @@ const handler = NextAuth({
     },
     async session({ session, token }) {
       session.user.id = token.id;
-      session.user.email = token.email;
+      session.user.username = token.username;
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.email = user.email;
+        token.username = user.username;
       }
       return token;
     },

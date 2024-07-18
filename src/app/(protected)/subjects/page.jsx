@@ -1,7 +1,7 @@
 "use client";
 
+import { GET_SUBJECTS } from "@/graphql/query";
 import { useQuery } from "@apollo/client";
-import { GET_SUBJECTS } from "../../../graphql/query";
 
 export default function Subjects() {
   const { loading, error, data } = useQuery(GET_SUBJECTS);

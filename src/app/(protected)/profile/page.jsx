@@ -1,9 +1,9 @@
 "use client";
 
+import { GET_PROFILE } from "@/graphql/query";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { GET_PROFILE } from "../../graphql/query";
 
 export default function Profile() {
   const [username, setUsername] = useState("sydykeqij");

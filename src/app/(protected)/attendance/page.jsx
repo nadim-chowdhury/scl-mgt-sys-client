@@ -1,7 +1,9 @@
+"use client";
+
 import { useQuery } from "@apollo/client";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
-import { GET_ATTENDANCE_REPORT } from "../../../graphql/query";
+import { GET_ATTENDANCE_REPORT } from "@/graphql/query";
 
 export default function AttendanceReport() {
   const { loading, error, data } = useQuery(GET_ATTENDANCE_REPORT);

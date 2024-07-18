@@ -290,3 +290,12 @@ export const GET_FINANCIAL_REPORT = gql`
     }
   }
 `;
+
+export const GET_STUDENT_PERFORMANCE_REPORT = gql`
+  query GetStudentPerformanceReport($studentId: Int!) {
+    studentPerformanceReport(studentId: $studentId) {
+      assignmentTitle
+      grade
+    }
+  }
+`;

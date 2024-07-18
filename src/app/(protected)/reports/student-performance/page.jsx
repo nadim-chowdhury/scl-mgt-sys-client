@@ -1,16 +1,10 @@
+"use client";
+
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
-
-const GET_STUDENT_PERFORMANCE_REPORT = gql`
-  query GetStudentPerformanceReport($studentId: Int!) {
-    studentPerformanceReport(studentId: $studentId) {
-      assignmentTitle
-      grade
-    }
-  }
-`;
+import { GET_STUDENT_PERFORMANCE_REPORT } from "@/graphql/query";
 
 export default function StudentPerformanceReport() {
   const [studentId, setStudentId] = useState("");

@@ -1,8 +1,8 @@
 "use client";
 
+import { CREATE_CLASS } from "@/graphql/mutation";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
-import { CREATE_CLASS } from "../../../graphql/mutation";
 
 export default function CreateClass() {
   const [name, setName] = useState("");
