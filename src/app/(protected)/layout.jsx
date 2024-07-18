@@ -59,7 +59,7 @@ export default function RootLayout({ children }) {
       <Layout className="h-screen">
         <Sider trigger={null} width={280} collapsible collapsed={collapsed}>
           <div
-            className="h-16 text-2xl text-white w-full bg-indigo-500 font-bold tracking-widest flex items-center justify-center"
+            className="h-16 text-2xl text-white w-full bg-amber-500 font-bold tracking-widest flex items-center justify-center"
             onClick={() => setCollapsed(!collapsed)}
           >
             <Link href="/" type="text">

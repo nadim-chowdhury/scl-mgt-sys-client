@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LOGIN_USER } from "../../graphql/mutation";
+import {
+  notifyError,
+  notifySuccess,
+} from "../../components/common/Notifications";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -20,10 +24,12 @@ export default function Login() {
       const { data } = await login({
         variables: { loginInput: { username, password } },
       });
+      notifySuccess("Login Successful");
       localStorage.setItem("token", data.login);
       router.push("/profile");
     } catch (err) {
       console.error(err);
+      notifyError("Something Went Wrong");
     }
   };
 
@@ -49,7 +55,7 @@ export default function Login() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
                   placeholder="Username"
                 />
               </div>
@@ -64,7 +70,7 @@ export default function Login() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
               </div>
@@ -76,7 +82,7 @@ export default function Login() {
                   id="remember_me"
                   name="remember_me"
                   type="checkbox"
-                  className="w-4 h-4 bg-indigo-600 border-gray-300 rounded"
+                  className="w-4 h-4 bg-amber-600 border-gray-300 rounded"
                 />
                 <label
                   htmlFor="remember_me"
@@ -89,7 +95,7 @@ export default function Login() {
               <div className="text-sm">
                 <Link
                   href="#"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                  className="font-medium text-amber-600 hover:text-amber-500"
                 >
                   Forgot your password?
                 </Link>
@@ -100,7 +106,7 @@ export default function Login() {
               <div className="flex items-center gap-2">
                 <button
                   type="submit"
-                  className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   Log in
                 </button>
@@ -108,7 +114,7 @@ export default function Login() {
                 <Link href="/register">
                   <button
                     type="button"
-                    className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
                   >
                     Register
                   </button>
@@ -116,17 +122,13 @@ export default function Login() {
               </div>
 
               <Link href="/" className="text-white">
-                <div className="flex justify-center mt-2 text-sm bg-indigo-700 rounded-md py-2">
+                <div className="flex justify-center mt-2 text-sm bg-amber-700 rounded-md py-2">
                   Return Home
                 </div>
               </Link>
             </div>
           </div>
         </form>
-
-        {/* {loading && <p>Loading...</p>}
-        {error && <p>Error: {error.message}</p>}
-        {data && <p>Login successful: {data.login}</p>} */}
       </div>
     </div>
   );

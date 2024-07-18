@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
-import socket from "../lib/socket";
-import { GET_ANNOUNCEMENTS } from "@/graphql/query";
+import { useQuery } from "@apollo/client";
+import socket from "../../../lib/socket";
+import { GET_ANNOUNCEMENTS } from "../../../graphql/query";
 
 export default function Announcements() {
   const [announcements, setAnnouncements] = useState([]);

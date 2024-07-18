@@ -46,7 +46,7 @@ export default function PricingSection() {
             <div
               key={plan.id}
               className={`bg-white rounded-lg  p-6 ${
-                plan.popular ? "border-4 border-indigo-500" : ""
+                plan.popular ? "border-4 border-amber-500" : ""
               }`}
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
@@ -84,8 +84,8 @@ export default function PricingSection() {
                 <a
                   href="/sign-up"
                   className={`${
-                    plan.popular ? "bg-indigo-500" : "bg-gray-700"
-                  } hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded`}
+                    plan.popular ? "bg-amber-500" : "bg-gray-700"
+                  } hover:bg-amber-700 text-white font-bold py-2 px-4 rounded`}
                 >
                   {plan.popular ? "Most Popular" : "Select Plan"}
                 </a>

@@ -25,7 +25,7 @@ export default function Testimonials() {
               width={1280}
               height={720}
             />
-            <h3 className="text-xl font-bold text-indigo-500 mb-1">
+            <h3 className="text-xl font-bold text-amber-500 mb-1">
               {testimonial.name}
             </h3>
             <p className="text-sm text-gray-500 mb-4">{testimonial.position}</p>

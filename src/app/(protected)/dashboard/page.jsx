@@ -12,7 +12,7 @@ export default function DashboardHome() {
             Manage students, view attendance, grades, etc.
           </p>
           <Link href="/students">
-            <span className="text-indigo-600 hover:underline mt-2 inline-block">
+            <span className="text-amber-600 hover:underline mt-2 inline-block">
               View Students
             </span>
           </Link>
@@ -23,7 +23,7 @@ export default function DashboardHome() {
             Manage teachers, assignments, schedules, etc.
           </p>
           <Link href="/teachers">
-            <span className="text-indigo-600 hover:underline mt-2 inline-block">
+            <span className="text-amber-600 hover:underline mt-2 inline-block">
               View Teachers
             </span>
           </Link>
@@ -34,7 +34,7 @@ export default function DashboardHome() {
             Manage classes, schedules, assignments, etc.
           </p>
           <Link href="/classes">
-            <span className="text-indigo-600 hover:underline mt-2 inline-block">
+            <span className="text-amber-600 hover:underline mt-2 inline-block">
               View Classes
             </span>
           </Link>
@@ -45,7 +45,7 @@ export default function DashboardHome() {
             Track attendance records of students and teachers.
           </p>
           <Link href="/attendance">
-            <span className="text-indigo-600 hover:underline mt-2 inline-block">
+            <span className="text-amber-600 hover:underline mt-2 inline-block">
               View Attendance
             </span>
           </Link>

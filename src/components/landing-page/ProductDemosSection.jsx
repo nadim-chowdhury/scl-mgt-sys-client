@@ -71,7 +71,7 @@ export default function ProductDemosSection() {
         <div className="text-center">
           <a
             href="/interactive-demo"
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
           >
             Try Interactive Demo
           </a>

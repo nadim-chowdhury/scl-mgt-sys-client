@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery, useMutation, gql } from "@apollo/client";
-import { GET_ASSIGNMENTS } from "@/graphql/query";
-import { CREATE_ASSIGNMENT, GRADE_SUBMISSION } from "@/graphql/mutation";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_ASSIGNMENTS } from "../../../graphql/query";
+import { CREATE_ASSIGNMENT, GRADE_SUBMISSION } from "../../../graphql/mutation";
 
 export default function Assignments() {
   const [title, setTitle] = useState("");

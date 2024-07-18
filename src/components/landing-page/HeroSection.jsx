@@ -21,7 +21,7 @@ export default function HeroSection() {
           <div className="space-x-4">
             <Link
               href="/register"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded border border-indigo-600"
+              className="bg-amber-600 hover:bg-amber-700 text-white py-2 px-4 rounded border border-amber-600"
             >
               Sign Up
             </Link>

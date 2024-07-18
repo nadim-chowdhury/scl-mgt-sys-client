@@ -1,7 +1,7 @@
 import { GraphQLClient } from "graphql-request";
 import { LOGIN_MUTATION } from "../graphql/mutation";
 
-const client = new GraphQLClient("http://127.0.0.1:8000/graphql");
+const client = new GraphQLClient(process.env.NEXT_PUBLIC_SERVER_URL);
 
 export async function getUserByEmailAndPassword(email, password) {
   try {

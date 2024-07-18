@@ -40,7 +40,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="mt-1 focus:ring-blue-500 focus:border-indigo-500 block w-full  sm:text-sm border-gray-300 rounded-md"
+            className="mt-1 focus:ring-blue-500 focus:border-amber-500 block w-full  sm:text-sm border-gray-300 rounded-md"
           />
         </div>
         <div>
@@ -57,7 +57,7 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="mt-1 focus:ring-blue-500 focus:border-indigo-500 block w-full  sm:text-sm border-gray-300 rounded-md"
+            className="mt-1 focus:ring-blue-500 focus:border-amber-500 block w-full  sm:text-sm border-gray-300 rounded-md"
           />
         </div>
       </div>
@@ -75,13 +75,13 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           required
-          className="mt-1 focus:ring-blue-500 focus:border-indigo-500 block w-full  sm:text-sm border-gray-300 rounded-md"
+          className="mt-1 focus:ring-blue-500 focus:border-amber-500 block w-full  sm:text-sm border-gray-300 rounded-md"
         />
       </div>
       <div className="mt-6">
         <button
           type="submit"
-          className="inline-flex items-center justify-center w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="inline-flex items-center justify-center w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           Send Message
         </button>

@@ -9,8 +9,8 @@ import {
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: "http://127.0.0.1:8000/graphql",
-    fetchOptions: { cache: "no-store" },
+    uri: process.env.NEXT_PUBLIC_SERVER_URL,
+    // fetchOptions: { cache: "no-store" },
   });
 
   return new ApolloClient({

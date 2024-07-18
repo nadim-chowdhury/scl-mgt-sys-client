@@ -30,7 +30,7 @@ export default function ContactSection() {
               <li>Phone: +1 (123) 456-7890</li>
               <li>
                 Live Chat:{" "}
-                <a href="/live-chat" className="bg-indigo-600">
+                <a href="/live-chat" className="bg-amber-600">
                   Start Live Chat
                 </a>
               </li>

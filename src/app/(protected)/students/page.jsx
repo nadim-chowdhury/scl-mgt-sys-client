@@ -1,9 +1,9 @@
 "use client";
 
 import Loading from "../../../app/loading";
-import { GET_STUDENTS } from "../../../graphql/query";
 import { useQuery } from "@apollo/client";
 import { Table } from "antd";
+import { GET_STUDENTS } from "../../../graphql/query";
 
 export default function AllStudents() {
   const { loading, error, data } = useQuery(GET_STUDENTS);
@@ -42,13 +42,13 @@ export default function AllStudents() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6">Students</h1>
-      {/* <ul>
-        {data.students.map((student) => (
+      <ul>
+        {data?.students?.map((student) => (
           <li key={student.id} className="p-2 border-b border-gray-300">
             {student.name} ({student.age} years old)
           </li>
         ))}
-      </ul> */}
+      </ul>
 
       <Table
         columns={columns}
