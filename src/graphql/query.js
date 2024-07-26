@@ -10,6 +10,17 @@ export const GET_STUDENTS = gql`
   }
 `;
 
+export const GET_TEACHERS = gql`
+  query GetTeachers {
+    teachers {
+      id
+      name
+      subject
+      age
+    }
+  }
+`;
+
 export const GET_PROFILE = gql`
   query GetProfile($username: String!) {
     profile(username: $username) {

@@ -5,6 +5,8 @@ import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { GET_STUDENT_PERFORMANCE_REPORT } from "@/graphql/query";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function StudentPerformanceReport() {
   const [studentId, setStudentId] = useState("");
@@ -39,7 +41,9 @@ export default function StudentPerformanceReport() {
 
   return (
     <div>
-      <h1>Student Performance Report</h1>
+      <Heading title="Student Performance Report" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <form onSubmit={handleSubmit}>
         <input
           type="number"

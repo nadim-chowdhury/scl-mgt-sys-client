@@ -5,10 +5,13 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import { REGISTER_USER } from "../../graphql/mutation";
 import Link from "next/link";
-import { notifyError, notifySuccess } from "../../components/common/Notifications";
+import {
+  notifyError,
+  notifySuccess,
+} from "../../components/common/Notifications";
 
 export default function Register() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
@@ -20,13 +23,14 @@ export default function Register() {
     e.preventDefault();
     try {
       await register({
-        variables: { createUserInput: { username, password, role } },
+        variables: { createUserInput: { email, password, role } },
       });
       notifySuccess("Successfully Registered");
       router.push("/login");
     } catch (err) {
       console.error(err);
       notifyError("Something Went Wrong");
+      router.push("/dashboard");
     }
   };
 
@@ -42,17 +46,17 @@ export default function Register() {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="username" className="sr-only">
-                Username
+              <label htmlFor="email" className="sr-only">
+                email
               </label>
               <input
-                id="username"
-                name="username"
+                id="email"
+                name="email"
                 type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
-                placeholder="Username"
+                placeholder="email"
               />
             </div>
 

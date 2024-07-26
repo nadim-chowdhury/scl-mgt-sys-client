@@ -5,6 +5,8 @@ import { useQuery } from "@apollo/client";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import { GET_ACADEMIC_PERFORMANCE_REPORT } from "@/graphql/query";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function AcademicPerformanceReport() {
   const [courseId, setCourseId] = useState("");
@@ -39,7 +41,9 @@ export default function AcademicPerformanceReport() {
 
   return (
     <div>
-      <h1>Academic Performance Report</h1>
+      <Heading title="Academic Performance Report" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <form onSubmit={handleSubmit}>
         <input
           type="number"
@@ -49,8 +53,7 @@ export default function AcademicPerformanceReport() {
         />
         <button type="submit">Generate Report</button>
       </form>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
+
       {data && (
         <div>
           <Bar data={chartData} />

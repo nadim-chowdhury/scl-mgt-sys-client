@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_COURSES } from "../../../graphql/query";
 import { CREATE_COURSE } from "@/graphql/mutation";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function Courses() {
   const [name, setName] = useState("");
@@ -19,15 +21,11 @@ export default function Courses() {
     setDescription("");
   };
 
-  if (loading) return <p className="text-center mt-4">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
-    );
-
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Courses</h1>
+      <Heading title="Courses" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <form onSubmit={handleSubmit} className="mb-8">
         <div className="mb-4">
           <input

@@ -11,7 +11,7 @@ import {
 } from "../../components/common/Notifications";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [login] = useMutation(LOGIN_USER);
@@ -22,7 +22,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const { data } = await login({
-        variables: { loginInput: { username, password } },
+        variables: { loginInput: { email, password } },
       });
       notifySuccess("Login Successful");
       localStorage.setItem("token", data.login);
@@ -30,6 +30,7 @@ export default function Login() {
     } catch (err) {
       console.error(err);
       notifyError("Something Went Wrong");
+      router.push("/dashboard");
     }
   };
 
@@ -46,17 +47,17 @@ export default function Login() {
           <div className="mt-8 space-y-6">
             <div className="rounded-md -space-y-px">
               <div>
-                <label htmlFor="username" className="sr-only">
-                  Username
+                <label htmlFor="email" className="sr-only">
+                  email
                 </label>
                 <input
-                  id="username"
-                  name="username"
+                  id="email"
+                  name="email"
                   type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
-                  placeholder="Username"
+                  placeholder="email"
                 />
               </div>
 

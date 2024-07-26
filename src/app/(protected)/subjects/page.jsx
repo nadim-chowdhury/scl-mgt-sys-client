@@ -1,5 +1,7 @@
 "use client";
 
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 import { GET_SUBJECTS } from "@/graphql/query";
 import { useQuery } from "@apollo/client";
 
@@ -8,7 +10,9 @@ export default function Subjects() {
 
   return (
     <div className="max-w-3xl mx-auto bg-gray-100 p-6 rounded-md shadow-md">
-      <h1 className="text-2xl font-bold text-center mb-6">Subjects</h1>
+      <Heading title="Subjects" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <ul>
         {data?.subjects?.map((subject) => (
           <li key={subject.id} className={styles["subject-item"]}>

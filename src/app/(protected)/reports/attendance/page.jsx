@@ -4,6 +4,8 @@ import { useQuery } from "@apollo/client";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import { GET_ATTENDANCE_REPORT } from "@/graphql/query";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function AttendanceReport() {
   const { loading, error, data } = useQuery(GET_ATTENDANCE_REPORT);
@@ -38,7 +40,9 @@ export default function AttendanceReport() {
 
   return (
     <div>
-      <h1>Attendance Report</h1>
+      <Heading title="Attendance Report" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <Bar data={chartData} />
       <ul>
         {data.attendanceReport.map((report, index) => (

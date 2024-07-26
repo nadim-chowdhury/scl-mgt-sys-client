@@ -21,11 +21,11 @@ export default function Profile() {
   //   }
   // }, [router]);
 
-  if (loading) return <p className="text-center mt-4">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
-    );
+  // if (loading) return <p className="text-center mt-4">Loading...</p>;
+  // if (error)
+  //   return (
+  //     <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
+  //   );
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

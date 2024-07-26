@@ -1,27 +1,26 @@
 "use client";
 
 import { useQuery } from "@apollo/client";
+import { classesDemoData } from "@/utils/classes-demo-data";
 import { GET_CLASSES } from "../../../graphql/query";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function Classes() {
   const { loading, error, data } = useQuery(GET_CLASSES);
 
-  if (loading) return <p className="text-center mt-4">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
-    );
-
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg mx-4">
-        <ul className="mt-8 space-y-4">
-          {data?.getClasses?.map((classItem) => (
-            <li key={classItem.id} className="p-4 border rounded-md shadow-sm">
-              {classItem.name} - {classItem.teacher.name}
-            </li>
-          ))}
-        </ul>
+    <div>
+      <Heading title="Classes" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
+      <div className="grid grid-cols-4 gap-6">
+        {(data?.getClasses || classesDemoData).map((classItem) => (
+          <div key={classItem.id} className="p-4 border rounded-md shadow-sm">
+            <p className="font-semibold">{classItem.name}</p>
+            <p className="text-gray-600">Teacher: {classItem.teacher.name}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

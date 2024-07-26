@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_PAYMENTS } from "@/graphql/query";
 import { CREATE_PAYMENT } from "@/graphql/mutation";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function Payments() {
   const [feeId, setFeeId] = useState("");
@@ -23,15 +25,11 @@ export default function Payments() {
     setMethod("");
   };
 
-  if (loading) return <p className="text-center mt-4">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
-    );
-
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Payments</h1>
+      <Heading title="Payments" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <form onSubmit={handleCreatePayment} className="mb-8">
         <div className="mb-4">
           <input

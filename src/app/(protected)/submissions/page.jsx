@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { CREATE_SUBMISSION } from "@/graphql/mutation";
 import { GET_SUBMISSIONS } from "@/graphql/query";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function Submissions() {
   const [content, setContent] = useState("");
@@ -27,15 +29,11 @@ export default function Submissions() {
     setStudentId("");
   };
 
-  if (loading) return <p className="text-center mt-4">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
-    );
-
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Submissions</h1>
+      <Heading title="Submissions" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <form onSubmit={handleSubmit} className="mb-8 space-y-4">
         <textarea
           placeholder="Content"
@@ -64,6 +62,7 @@ export default function Submissions() {
           Submit Assignment
         </button>
       </form>
+
       <ul className="space-y-6">
         {data.submissions.map((submission) => (
           <li

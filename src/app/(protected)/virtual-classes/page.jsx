@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { CREATE_VIRTUAL_CLASS, UPDATE_SCHEDULE } from "@/graphql/mutation";
 import { GET_VIRTUAL_CLASSES } from "@/graphql/query";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function VirtualClasses() {
   const [meetingLink, setMeetingLink] = useState("");
@@ -32,15 +34,13 @@ export default function VirtualClasses() {
     setSchedule("");
   };
 
-  if (loading) return <p className="text-center mt-4">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
-    );
-
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Virtual Classes</h1>
+      <h1 className="text-3xl font-bold mb-6"></h1>
+
+      <Heading title="Virtual Classes" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <form onSubmit={handleCreateVirtualClass} className="mb-8 space-y-4">
         <input
           type="text"
@@ -70,6 +70,7 @@ export default function VirtualClasses() {
           Create Virtual Class
         </button>
       </form>
+
       <form onSubmit={handleUpdateSchedule} className="mb-8 space-y-4">
         <input
           type="number"
@@ -92,6 +93,7 @@ export default function VirtualClasses() {
           Update Schedule
         </button>
       </form>
+
       <ul className="space-y-6">
         {data.virtualClasses.map((virtualClass) => (
           <li

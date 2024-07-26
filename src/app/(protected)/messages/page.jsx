@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_MESSAGES } from "@/graphql/query";
 import socket from "@/lib/socket";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function Messages() {
   const [messages, setMessages] = useState([]);
@@ -41,12 +43,14 @@ export default function Messages() {
     setContent("");
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Messages</h1>
+    <div>
+      <Heading title="Messages" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <form
         onSubmit={handleSubmit}
         className="mb-4 p-4 bg-white shadow rounded-lg"

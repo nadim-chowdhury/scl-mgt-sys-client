@@ -1,9 +1,11 @@
 "use client";
 
-import Loading from "../../../app/loading";
 import { useQuery } from "@apollo/client";
 import { Table } from "antd";
+import { studentsDemoData } from "@/utils/students-demo-data";
 import { GET_STUDENTS } from "../../../graphql/query";
+import Heading from "@/components/Heading";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 
 export default function AllStudents() {
   const { loading, error, data } = useQuery(GET_STUDENTS);
@@ -36,12 +38,11 @@ export default function AllStudents() {
       `Showing ${range[0]}-${range[1]} of ${total} items`,
   };
 
-  if (loading) return <Loading />;
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">Students</h1>
+    <div>
+      <Heading title="Students" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <ul>
         {data?.students?.map((student) => (
           <li key={student.id} className="p-2 border-b border-gray-300">
@@ -52,7 +53,7 @@ export default function AllStudents() {
 
       <Table
         columns={columns}
-        dataSource={data?.students}
+        dataSource={data?.students || studentsDemoData}
         pagination={paginationConfig}
         rowKey="id"
         className="border rounded-md"

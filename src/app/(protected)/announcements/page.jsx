@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ANNOUNCEMENTS } from "../../../graphql/query";
 import socket from "@/lib/socket";
+import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
+import Heading from "@/components/Heading";
 
 export default function Announcements() {
   const [announcements, setAnnouncements] = useState([]);
@@ -38,15 +40,11 @@ export default function Announcements() {
     setContent("");
   };
 
-  if (loading) return <p className="text-center mt-4">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
-    );
-
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Announcements</h1>
+    <div>
+      <Heading title="Announcements" />
+      <LoadingAndErrorMessage loading={loading} error={error} />
+
       <form onSubmit={handleSubmit} className="mb-8">
         <div className="mb-4">
           <input
@@ -72,6 +70,7 @@ export default function Announcements() {
           Create Announcement
         </button>
       </form>
+
       <ul className="space-y-4">
         {announcements.map((ann) => (
           <li key={ann.id} className="p-4 border border-gray-300 rounded">
