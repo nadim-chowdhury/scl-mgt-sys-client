@@ -50,8 +50,8 @@ export default function AllTeachers() {
 
       <ul>
         {data?.teachers?.map((teacher) => (
-          <li key={teacher.id} className="p-2 border-b border-gray-300">
-            {teacher.name} ({teacher.subject} - {teacher.age} years old)
+          <li key={teacher?.id} className="p-2 border-b border-gray-300">
+            {teacher?.name} ({teacher?.subject} - {teacher?.age} years old)
           </li>
         ))}
       </ul>

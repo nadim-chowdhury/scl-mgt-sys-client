@@ -58,11 +58,11 @@ export default function AcademicPerformanceReport() {
         <div>
           <Bar data={chartData} />
           <ul>
-            {data.academicPerformanceReport.map((report, index) => (
+            {data?.academicPerformanceReport?.map((report, index) => (
               <li key={index}>
-                <h2>{report.assignmentTitle}</h2>
-                <p>Submissions: {report.submissions}</p>
-                <p>Average Score: {report.averageScore}</p>
+                <h2>{report?.assignmentTitle}</h2>
+                <p>Submissions: {report?.submissions}</p>
+                <p>Average Score: {report?.averageScore}</p>
               </li>
             ))}
           </ul>

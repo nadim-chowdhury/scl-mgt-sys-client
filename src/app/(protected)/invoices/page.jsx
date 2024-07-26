@@ -69,6 +69,7 @@ export default function Invoices() {
           Create Invoice
         </button>
       </form>
+      
       <ul className="space-y-4">
         {data.invoices.map((invoice) => (
           <li key={invoice.id} className="p-4 border border-gray-300 rounded">

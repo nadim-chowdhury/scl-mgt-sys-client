@@ -64,24 +64,25 @@ export default function Submissions() {
       </form>
 
       <ul className="space-y-6">
-        {data.submissions.map((submission) => (
+        {data?.submissions?.map((submission) => (
           <li
-            key={submission.id}
+            key={submission?.id}
             className="p-4 border border-gray-300 rounded"
           >
             <h2 className="text-2xl font-semibold mb-2">
-              {submission.assignment.title}
+              {submission?.assignment?.title}
             </h2>
             <p>
               <span className="font-medium">Submitted by:</span>{" "}
-              {submission.student.username}
+              {submission?.student?.username}
             </p>
             <p>
               <span className="font-medium">Submitted at:</span>{" "}
-              {submission.submittedAt}
+              {submission?.submittedAt}
             </p>
             <p>
-              <span className="font-medium">Content:</span> {submission.content}
+              <span className="font-medium">Content:</span>{" "}
+              {submission?.content}
             </p>
           </li>
         ))}

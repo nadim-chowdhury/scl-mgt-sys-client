@@ -39,9 +39,9 @@ export default function FinancialReport() {
 
       <Pie data={chartData} />
 
-      <p>Total Fees: {data.financialReport.totalFees}</p>
-      <p>Total Payments: {data.financialReport.totalPayments}</p>
-      <p>Outstanding Amount: {data.financialReport.outstandingAmount}</p>
+      <p>Total Fees: {data?.financialReport?.totalFees}</p>
+      <p>Total Payments: {data?.financialReport?.totalPayments}</p>
+      <p>Outstanding Amount: {data?.financialReport?.outstandingAmount}</p>
     </div>
   );
 }

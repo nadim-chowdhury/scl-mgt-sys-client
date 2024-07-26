@@ -43,9 +43,6 @@ export default function Messages() {
     setContent("");
   };
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error: {error.message}</p>;
-
   return (
     <div>
       <Heading title="Messages" />
@@ -88,12 +85,13 @@ export default function Messages() {
           Send Message
         </button>
       </form>
+
       <ul className="bg-white shadow rounded-lg p-4">
-        {messages.map((msg) => (
-          <li key={msg.id} className="mb-2 border-b pb-2">
-            <strong>{msg.sender.username}</strong> to{" "}
-            <strong>{msg.receiver.username}</strong>: {msg.content}{" "}
-            <em className="text-gray-500 text-sm">at {msg.timestamp}</em>
+        {messages?.map((msg) => (
+          <li key={msg?.id} className="mb-2 border-b pb-2">
+            <strong>{msg?.sender?.username}</strong> to{" "}
+            <strong>{msg?.receiver?.username}</strong>: {msg?.content}{" "}
+            <em className="text-gray-500 text-sm">at {msg?.timestamp}</em>
           </li>
         ))}
       </ul>

@@ -65,23 +65,24 @@ export default function Payments() {
           Create Payment
         </button>
       </form>
+
       <ul className="space-y-4">
-        {data.payments.map((payment) => (
-          <li key={payment.id} className="p-4 border border-gray-300 rounded">
+        {data?.payments?.map((payment) => (
+          <li key={payment?.id} className="p-4 border border-gray-300 rounded">
             <p className="text-lg">
-              <strong>Fee:</strong> {payment.fee.amount}
+              <strong>Fee:</strong> {payment?.fee?.amount}
             </p>
             <p>
-              <strong>User:</strong> {payment.fee.user.username}
+              <strong>User:</strong> {payment?.fee?.user?.username}
             </p>
             <p>
-              <strong>Amount:</strong> {payment.amount}
+              <strong>Amount:</strong> {payment?.amount}
             </p>
             <p>
-              <strong>Date:</strong> {payment.paymentDate}
+              <strong>Date:</strong> {payment?.paymentDate}
             </p>
             <p>
-              <strong>Method:</strong> {payment.method}
+              <strong>Method:</strong> {payment?.method}
             </p>
           </li>
         ))}

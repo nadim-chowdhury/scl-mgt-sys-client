@@ -45,8 +45,8 @@ export default function AllStudents() {
 
       <ul>
         {data?.students?.map((student) => (
-          <li key={student.id} className="p-2 border-b border-gray-300">
-            {student.name} ({student.age} years old)
+          <li key={student?.id} className="p-2 border-b border-gray-300">
+            {student?.name} ({student?.age} years old)
           </li>
         ))}
       </ul>

@@ -53,16 +53,16 @@ export default function StudentPerformanceReport() {
         />
         <button type="submit">Generate Report</button>
       </form>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
+
       {data && (
         <div>
           <Line data={chartData} />
+
           <ul>
-            {data.studentPerformanceReport.map((report, index) => (
+            {data?.studentPerformanceReport?.map((report, index) => (
               <li key={index}>
-                <h2>{report.assignmentTitle}</h2>
-                <p>Grade: {report.grade}</p>
+                <h2>{report?.assignmentTitle}</h2>
+                <p>Grade: {report?.grade}</p>
               </li>
             ))}
           </ul>

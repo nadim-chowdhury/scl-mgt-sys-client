@@ -44,13 +44,14 @@ export default function AttendanceReport() {
       <LoadingAndErrorMessage loading={loading} error={error} />
 
       <Bar data={chartData} />
+      
       <ul>
-        {data.attendanceReport.map((report, index) => (
+        {data?.attendanceReport?.map((report, index) => (
           <li key={index}>
-            <p>Student: {report.student}</p>
-            <p>Class: {report.class}</p>
-            <p>Date: {report.date}</p>
-            <p>Status: {report.status}</p>
+            <p>Student: {report?.student}</p>
+            <p>Class: {report?.class}</p>
+            <p>Date: {report?.date}</p>
+            <p>Status: {report?.status}</p>
           </li>
         ))}
       </ul>

@@ -15,9 +15,9 @@ export default function Subjects() {
 
       <ul>
         {data?.subjects?.map((subject) => (
-          <li key={subject.id} className={styles["subject-item"]}>
+          <li key={subject?.id} className={styles["subject-item"]}>
             <span className={styles["subject-details"]}>
-              {subject.name} - {subject.class.name}
+              {subject?.name} - {subject?.class?.name}
             </span>
           </li>
         ))}

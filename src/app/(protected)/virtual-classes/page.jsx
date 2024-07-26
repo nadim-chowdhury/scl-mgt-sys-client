@@ -95,15 +95,15 @@ export default function VirtualClasses() {
       </form>
 
       <ul className="space-y-6">
-        {data.virtualClasses.map((virtualClass) => (
+        {data?.virtualClasses?.map((virtualClass) => (
           <li
-            key={virtualClass.id}
+            key={virtualClass?.id}
             className="p-4 border border-gray-300 rounded"
           >
             <p className="mb-2">
               Meeting Link:{" "}
               <a
-                href={virtualClass.meetingLink}
+                href={virtualClass?.meetingLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 underline"
@@ -111,8 +111,8 @@ export default function VirtualClasses() {
                 Join
               </a>
             </p>
-            <p className="mb-1">Schedule: {virtualClass.schedule}</p>
-            <p className="mb-1">Course: {virtualClass.course.name}</p>
+            <p className="mb-1">Schedule: {virtualClass?.schedule}</p>
+            <p className="mb-1">Course: {virtualClass?.course?.name}</p>
           </li>
         ))}
       </ul>
