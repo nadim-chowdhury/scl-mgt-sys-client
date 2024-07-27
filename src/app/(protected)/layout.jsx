@@ -121,7 +121,10 @@ export default function RootLayout({ children }) {
               }}
             />
 
-            <AvatarWithLogout username="John Doe" onLogout={handleLogout} />
+            <AvatarWithLogout
+              username="Nadim Chowdhury"
+              onLogout={handleLogout}
+            />
           </Header>
 
           <Content
@@ -132,6 +135,7 @@ export default function RootLayout({ children }) {
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
             }}
+            className="overflow-y-scroll"
           >
             {isLoggedIn && children}
           </Content>
