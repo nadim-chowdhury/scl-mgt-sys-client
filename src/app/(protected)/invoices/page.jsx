@@ -69,21 +69,21 @@ export default function Invoices() {
           Create Invoice
         </button>
       </form>
-      
+
       <ul className="space-y-4">
-        {data.invoices.map((invoice) => (
-          <li key={invoice.id} className="p-4 border border-gray-300 rounded">
+        {(data?.invoices || [])?.map((invoice) => (
+          <li key={invoice?.id} className="p-4 border border-gray-300 rounded">
             <p className="text-lg">
-              <strong>User:</strong> {invoice.user.username}
+              <strong>User:</strong> {invoice?.user?.username}
             </p>
             <p>
-              <strong>Amount:</strong> {invoice.amount}
+              <strong>Amount:</strong> {invoice?.amount}
             </p>
             <p>
-              <strong>Generated At:</strong> {invoice.generatedAt}
+              <strong>Generated At:</strong> {invoice?.generatedAt}
             </p>
             <p>
-              <strong>Payment ID:</strong> {invoice.payment.id}
+              <strong>Payment ID:</strong> {invoice?.payment?.id}
             </p>
           </li>
         ))}

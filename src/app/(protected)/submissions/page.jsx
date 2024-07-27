@@ -64,7 +64,7 @@ export default function Submissions() {
       </form>
 
       <ul className="space-y-6">
-        {data?.submissions?.map((submission) => (
+        {(data?.submissions || [])?.map((submission) => (
           <li
             key={submission?.id}
             className="p-4 border border-gray-300 rounded"

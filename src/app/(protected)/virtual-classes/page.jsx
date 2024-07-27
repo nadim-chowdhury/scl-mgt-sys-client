@@ -35,7 +35,7 @@ export default function VirtualClasses() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div>
       <h1 className="text-3xl font-bold mb-6"></h1>
 
       <Heading title="Virtual Classes" />
@@ -95,7 +95,7 @@ export default function VirtualClasses() {
       </form>
 
       <ul className="space-y-6">
-        {data?.virtualClasses?.map((virtualClass) => (
+        {(data?.virtualClasses || [])?.map((virtualClass) => (
           <li
             key={virtualClass?.id}
             className="p-4 border border-gray-300 rounded"

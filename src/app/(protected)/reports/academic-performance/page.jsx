@@ -25,13 +25,13 @@ export default function AcademicPerformanceReport() {
 
   const chartData = {
     labels:
-      data?.academicPerformanceReport.map((report) => report.assignmentTitle) ||
+      data?.academicPerformanceReport?.map((report) => report.assignmentTitle) ||
       [],
     datasets: [
       {
         label: "Average Score",
         data:
-          data?.academicPerformanceReport.map(
+          data?.academicPerformanceReport?.map(
             (report) => report.averageScore
           ) || [],
         backgroundColor: "rgba(75, 192, 192, 0.6)",
@@ -54,20 +54,17 @@ export default function AcademicPerformanceReport() {
         <button type="submit">Generate Report</button>
       </form>
 
-      {data && (
-        <div>
-          <Bar data={chartData} />
-          <ul>
-            {data?.academicPerformanceReport?.map((report, index) => (
-              <li key={index}>
-                <h2>{report?.assignmentTitle}</h2>
-                <p>Submissions: {report?.submissions}</p>
-                <p>Average Score: {report?.averageScore}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <Bar data={chartData} />
+
+      <ul>
+        {(data?.academicPerformanceReport || [])?.map((report, index) => (
+          <li key={index}>
+            <h2>{report?.assignmentTitle}</h2>
+            <p>Submissions: {report?.submissions}</p>
+            <p>Average Score: {report?.averageScore}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -85,6 +85,7 @@ export default function Assignments() {
           Create Assignment
         </button>
       </form>
+
       <form onSubmit={handleGradeSubmission} className="mb-8 space-y-4">
         <input
           type="number"
@@ -113,48 +114,49 @@ export default function Assignments() {
           Grade Submission
         </button>
       </form>
+
       <ul className="space-y-6">
-        {data.assignments.map((assignment) => (
+        {(data?.assignments || [])?.map((assignment) => (
           <li
-            key={assignment.id}
+            key={assignment?.id}
             className="p-4 border border-gray-300 rounded"
           >
-            <h2 className="text-2xl font-semibold mb-2">{assignment.title}</h2>
-            <p className="mb-4">{assignment.description}</p>
+            <h2 className="text-2xl font-semibold mb-2">{assignment?.title}</h2>
+            <p className="mb-4">{assignment?.description}</p>
             <p className="mb-4">
               <span className="font-medium">Due Date:</span>{" "}
-              {assignment.dueDate}
+              {assignment?.dueDate}
             </p>
             <p className="mb-4">
               <span className="font-medium">Course:</span>{" "}
-              {assignment.course.name}
+              {assignment?.course?.name}
             </p>
             <h3 className="text-xl font-semibold mb-2">Submissions</h3>
             <ul className="space-y-2">
-              {assignment.submissions.map((submission) => (
+              {(assignment?.submissions || [])?.map((submission) => (
                 <li
-                  key={submission.id}
+                  key={submission?.id}
                   className="p-2 border border-gray-200 rounded"
                 >
                   <p>
                     <span className="font-medium">Submitted by:</span>{" "}
-                    {submission.student.username}
+                    {submission?.student.username}
                   </p>
                   <p>
                     <span className="font-medium">Submitted at:</span>{" "}
-                    {submission.submittedAt}
+                    {submission?.submittedAt}
                   </p>
                   <p className="mb-2">
                     <span className="font-medium">Content:</span>{" "}
-                    {submission.content}
+                    {submission?.content}
                   </p>
                   <p className="mb-2">
                     <span className="font-medium">Grade:</span>{" "}
-                    {submission.grade}
+                    {submission?.grade}
                   </p>
                   <p>
                     <span className="font-medium">Feedback:</span>{" "}
-                    {submission.feedback}
+                    {submission?.feedback}
                   </p>
                 </li>
               ))}

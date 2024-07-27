@@ -25,13 +25,13 @@ export default function StudentPerformanceReport() {
 
   const chartData = {
     labels:
-      data?.studentPerformanceReport.map((report) => report.assignmentTitle) ||
+      data?.studentPerformanceReport?.map((report) => report.assignmentTitle) ||
       [],
     datasets: [
       {
         label: "Grades",
         data:
-          data?.studentPerformanceReport.map((report) => report.grade) || [],
+          data?.studentPerformanceReport?.map((report) => report.grade) || [],
         backgroundColor: "rgba(75, 192, 192, 0.6)",
         borderColor: "rgba(75, 192, 192, 1)",
         fill: false,
@@ -54,20 +54,16 @@ export default function StudentPerformanceReport() {
         <button type="submit">Generate Report</button>
       </form>
 
-      {data && (
-        <div>
-          <Line data={chartData} />
+      <Line data={chartData} />
 
-          <ul>
-            {data?.studentPerformanceReport?.map((report, index) => (
-              <li key={index}>
-                <h2>{report?.assignmentTitle}</h2>
-                <p>Grade: {report?.grade}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <ul>
+        {(data?.studentPerformanceReport || [])?.map((report, index) => (
+          <li key={index}>
+            <h2>{report?.assignmentTitle}</h2>
+            <p>Grade: {report?.grade}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

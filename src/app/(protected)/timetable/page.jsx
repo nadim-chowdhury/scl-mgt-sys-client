@@ -14,7 +14,7 @@ export default function Timetable() {
       <LoadingAndErrorMessage loading={loading} error={error} />
 
       <ul className="divide-y divide-gray-300">
-        {data?.timetables?.map((tt) => (
+        {(data?.timetables || [])?.map((tt) => (
           <li key={tt.id} className="py-2">
             <div className="flex items-center space-x-4">
               <div className="flex-1">

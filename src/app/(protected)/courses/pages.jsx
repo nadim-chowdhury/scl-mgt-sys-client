@@ -22,7 +22,7 @@ export default function Courses() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div>
       <Heading title="Courses" />
       <LoadingAndErrorMessage loading={loading} error={error} />
 
@@ -51,20 +51,24 @@ export default function Courses() {
           Create Course
         </button>
       </form>
+
       <ul className="space-y-6">
-        {data.courses.map((course) => (
-          <li key={course.id} className="p-4 border border-gray-300 rounded">
-            <h2 className="text-2xl font-semibold mb-2">{course.name}</h2>
-            <p className="mb-4">{course.description}</p>
+        {(data?.courses || [])?.map((course) => (
+          <li key={course?.id} className="p-4 border border-gray-300 rounded">
+            <h2 className="text-2xl font-semibold mb-2">{course?.name}</h2>
+            <p className="mb-4">{course?.description}</p>
             <h3 className="text-xl font-semibold mb-2">Assignments</h3>
+            
             <ul className="space-y-2">
-              {course.assignments.map((assignment) => (
+              {(course?.assignments || [])?.map((assignment) => (
                 <li
-                  key={assignment.id}
+                  key={assignment?.id}
                   className="p-2 border border-gray-200 rounded"
                 >
-                  {assignment.title} -{" "}
-                  <span className="font-medium">Due: {assignment.dueDate}</span>
+                  {assignment?.title} -{" "}
+                  <span className="font-medium">
+                    Due: {assignment?.dueDate}
+                  </span>
                 </li>
               ))}
             </ul>

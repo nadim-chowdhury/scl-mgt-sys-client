@@ -87,7 +87,7 @@ export default function Messages() {
       </form>
 
       <ul className="bg-white shadow rounded-lg p-4">
-        {messages?.map((msg) => (
+        {(messages || [])?.map((msg) => (
           <li key={msg?.id} className="mb-2 border-b pb-2">
             <strong>{msg?.sender?.username}</strong> to{" "}
             <strong>{msg?.receiver?.username}</strong>: {msg?.content}{" "}

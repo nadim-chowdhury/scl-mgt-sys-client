@@ -51,24 +51,25 @@ export default function AttendanceReport() {
       <div className="mb-8">
         <Bar data={chartData} />
       </div>
+
       <ul className="space-y-6">
-        {data.attendanceReport.map((report, index) => (
+        {(data?.attendanceReport || [])?.map((report, index) => (
           <li key={index} className="p-4 border border-gray-300 rounded">
             <p className="mb-1">
-              <strong>Student:</strong> {report.student}
+              <strong>Student:</strong> {report?.student}
             </p>
             <p className="mb-1">
-              <strong>Class:</strong> {report.class}
+              <strong>Class:</strong> {report?.class}
             </p>
             <p className="mb-1">
-              <strong>Date:</strong> {report.date}
+              <strong>Date:</strong> {report?.date}
             </p>
             <p
               className={`mb-1 ${
-                report.status === "Present" ? "text-green-500" : "text-red-500"
+                report?.status === "Present" ? "text-green-500" : "text-red-500"
               }`}
             >
-              <strong>Status:</strong> {report.status}
+              <strong>Status:</strong> {report?.status}
             </p>
           </li>
         ))}

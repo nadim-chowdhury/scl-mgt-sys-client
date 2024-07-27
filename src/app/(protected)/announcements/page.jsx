@@ -72,11 +72,11 @@ export default function Announcements() {
       </form>
 
       <ul className="space-y-4">
-        {announcements.map((ann) => (
-          <li key={ann.id} className="p-4 border border-gray-300 rounded">
-            <strong className="block text-lg">{ann.title}</strong>
-            <p>{ann.content}</p>
-            <em className="block text-sm text-gray-500">at {ann.createdAt}</em>
+        {(announcements || [])?.map((ann) => (
+          <li key={ann?.id} className="p-4 border border-gray-300 rounded">
+            <strong className="block text-lg">{ann?.title}</strong>
+            <p>{ann?.content}</p>
+            <em className="block text-sm text-gray-500">at {ann?.createdAt}</em>
           </li>
         ))}
       </ul>

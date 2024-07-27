@@ -10,18 +10,15 @@ import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 export default function FinancialReport() {
   const { loading, error, data } = useQuery(GET_FINANCIAL_REPORT);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
   const chartData = {
     labels: ["Total Fees", "Total Payments", "Outstanding Amount"],
     datasets: [
       {
         label: "Financial Data",
         data: [
-          data.financialReport.totalFees,
-          data.financialReport.totalPayments,
-          data.financialReport.outstandingAmount,
+          data?.financialReport?.totalFees,
+          data?.financialReport?.totalPayments,
+          data?.financialReport?.outstandingAmount,
         ],
         backgroundColor: [
           "rgba(75, 192, 192, 0.6)",

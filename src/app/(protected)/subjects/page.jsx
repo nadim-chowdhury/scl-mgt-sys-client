@@ -14,7 +14,7 @@ export default function Subjects() {
       <LoadingAndErrorMessage loading={loading} error={error} />
 
       <ul>
-        {data?.subjects?.map((subject) => (
+        {(data?.subjects || [])?.map((subject) => (
           <li key={subject?.id} className={styles["subject-item"]}>
             <span className={styles["subject-details"]}>
               {subject?.name} - {subject?.class?.name}

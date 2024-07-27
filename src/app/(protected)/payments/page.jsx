@@ -67,7 +67,7 @@ export default function Payments() {
       </form>
 
       <ul className="space-y-4">
-        {data?.payments?.map((payment) => (
+        {(data?.payments || [])?.map((payment) => (
           <li key={payment?.id} className="p-4 border border-gray-300 rounded">
             <p className="text-lg">
               <strong>Fee:</strong> {payment?.fee?.amount}

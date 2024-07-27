@@ -16,9 +16,12 @@ export default function Classes() {
 
       <div className="grid grid-cols-4 gap-6">
         {(data?.getClasses || classesDemoData).map((classItem) => (
-          <div key={classItem.id} className="border p-4 rounded-lg bg-amber-50">
-            <p className="font-semibold mb-2">{classItem.name}</p>
-            <p className="text-gray-600">Teacher: {classItem.teacher.name}</p>
+          <div
+            key={classItem?.id}
+            className="border p-4 rounded-lg bg-amber-50"
+          >
+            <p className="font-semibold mb-2">{classItem?.name}</p>
+            <p className="text-gray-600">Teacher: {classItem?.teacher.name}</p>
           </div>
         ))}
       </div>

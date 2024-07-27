@@ -14,7 +14,7 @@ export default function PaymentHistory() {
       <LoadingAndErrorMessage loading={loading} error={error} />
 
       <ul className="space-y-4">
-        {data?.payments?.map((payment) => (
+        {(data?.payments || [])?.map((payment) => (
           <li key={payment?.id} className="p-4 border border-gray-300 rounded">
             <p className="text-lg">
               <strong>User:</strong> {payment?.fee?.user?.username}

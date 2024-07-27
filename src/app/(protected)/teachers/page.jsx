@@ -49,7 +49,7 @@ export default function AllTeachers() {
       <LoadingAndErrorMessage loading={loading} error={error} />
 
       <ul>
-        {data?.teachers?.map((teacher) => (
+        {(data?.teachers || [])?.map((teacher) => (
           <li key={teacher?.id} className="p-2 border-b border-gray-300">
             {teacher?.name} ({teacher?.subject} - {teacher?.age} years old)
           </li>

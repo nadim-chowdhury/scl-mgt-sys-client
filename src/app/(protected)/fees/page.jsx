@@ -79,6 +79,7 @@ export default function Fees() {
           Create Fee
         </button>
       </form>
+
       <form onSubmit={handleUpdateFeeStatus} className="mb-8">
         <div className="mb-4">
           <input
@@ -89,6 +90,7 @@ export default function Fees() {
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
+
         <div className="mb-4">
           <input
             type="text"
@@ -98,6 +100,7 @@ export default function Fees() {
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
+
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
@@ -105,20 +108,21 @@ export default function Fees() {
           Update Fee Status
         </button>
       </form>
+
       <ul className="space-y-4">
-        {data.fees.map((fee) => (
-          <li key={fee.id} className="p-4 border border-gray-300 rounded">
+        {(data?.fees || [])?.map((fee) => (
+          <li key={fee?.id} className="p-4 border border-gray-300 rounded">
             <p className="text-lg">
-              <strong>User:</strong> {fee.user.username}
+              <strong>User:</strong> {fee?.user?.username}
             </p>
             <p>
-              <strong>Amount:</strong> {fee.amount}
+              <strong>Amount:</strong> {fee?.amount}
             </p>
             <p>
-              <strong>Due:</strong> {fee.dueDate}
+              <strong>Due:</strong> {fee?.dueDate}
             </p>
             <p>
-              <strong>Status:</strong> {fee.status}
+              <strong>Status:</strong> {fee?.status}
             </p>
           </li>
         ))}
