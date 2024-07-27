@@ -65,7 +65,7 @@ export default function VirtualClasses() {
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-amber-500 text-white px-4 py-2 rounded"
         >
           Create Virtual Class
         </button>
@@ -88,7 +88,7 @@ export default function VirtualClasses() {
         />
         <button
           type="submit"
-          className="bg-green-500 text-white px-4 py-2 rounded"
+          className="bg-amber-500 text-white px-4 py-2 rounded"
         >
           Update Schedule
         </button>
@@ -106,7 +106,7 @@ export default function VirtualClasses() {
                 href={virtualClass?.meetingLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 underline"
+                className="text-amber-500 underline"
               >
                 Join
               </a>

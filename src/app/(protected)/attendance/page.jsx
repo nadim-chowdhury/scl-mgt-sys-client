@@ -1,43 +1,64 @@
 "use client";
 
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import { GET_ATTENDANCE_REPORT } from "@/graphql/query";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
+import { attendanceReportMockData } from "@/utils/demoData";
+import { MARK_ATTENDANCE } from "@/graphql/mutation";
+import { useState } from "react";
 
 export default function AttendanceReport() {
+  const [classId, setClassId] = useState("");
+  const [studentId, setStudentId] = useState("");
+  const [date, setDate] = useState("");
+  const [status, setStatus] = useState("");
+
   const { loading, error, data } = useQuery(GET_ATTENDANCE_REPORT);
+  const [markAttendance] = useMutation(MARK_ATTENDANCE);
 
-  if (loading) return <p className="text-center mt-4">Loading...</p>;
-  if (error)
-    return (
-      <p className="text-center mt-4 text-red-500">Error: {error.message}</p>
-    );
-
-  const presentData = data.attendanceReport.filter(
-    (report) => report.status === "Present"
-  );
-  const absentData = data.attendanceReport.filter(
-    (report) => report.status === "Absent"
-  );
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await markAttendance({
+      variables: {
+        classId: parseInt(classId),
+        studentId: parseInt(studentId),
+        date,
+        status,
+      },
+    });
+    setClassId("");
+    setStudentId("");
+    setDate("");
+    setStatus("");
+  };
 
   const chartData = {
-    labels: [...new Set(data.attendanceReport.map((report) => report.date))],
+    labels: [
+      ...new Set(
+        (data?.attendanceReport?.length > 0
+          ? data?.attendanceReport
+          : attendanceReportMockData
+        )?.map((report) => report.date)
+      ),
+    ],
     datasets: [
       {
         label: "Present",
-        data: data.attendanceReport.map((report) =>
-          report.status === "Present" ? 1 : 0
-        ),
+        data: (data?.attendanceReport?.length > 0
+          ? data?.attendanceReport
+          : attendanceReportMockData
+        )?.map((report) => (report.status === "Present" ? 1 : 0)),
         backgroundColor: "rgba(75, 192, 192, 0.6)",
       },
       {
         label: "Absent",
-        data: data.attendanceReport.map((report) =>
-          report.status === "Absent" ? 1 : 0
-        ),
+        data: (data?.attendanceReport?.length > 0
+          ? data?.attendanceReport
+          : attendanceReportMockData
+        )?.map((report) => (report.status === "Absent" ? 1 : 0)),
         backgroundColor: "rgba(255, 99, 132, 0.6)",
       },
     ],
@@ -46,15 +67,62 @@ export default function AttendanceReport() {
   return (
     <div>
       <Heading title="Attendance Report" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
-      <div className="mb-8">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4 bg-indigo-50 p-6 rounded-md border mb-8"
+      >
+        <input
+          type="number"
+          placeholder="Class ID"
+          value={classId}
+          onChange={(e) => setClassId(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded w-full"
+        />
+        <input
+          type="number"
+          placeholder="Student ID"
+          value={studentId}
+          onChange={(e) => setStudentId(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded w-full"
+        />
+        <input
+          type="date"
+          placeholder="Date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded w-full"
+        />
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded w-full"
+        >
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+        </select>
+
+        <button
+          type="submit"
+          className="px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600"
+        >
+          Mark Attendance
+        </button>
+      </form>
+
+      <Heading title="Report Chart" />
+      <div className="border p-6 rounded-md mb-8">
         <Bar data={chartData} />
       </div>
 
-      <ul className="space-y-6">
-        {(data?.attendanceReport || [])?.map((report, index) => (
-          <li key={index} className="p-4 border border-gray-300 rounded">
+      <Heading title="Report List" />
+      <div className="grid grid-cols-4 gap-6">
+        {(data?.attendanceReport?.length > 0
+          ? data?.attendanceReport
+          : attendanceReportMockData
+        )?.map((report, index) => (
+          <div key={index} className="p-6 border rounded-md bg-amber-50">
             <p className="mb-1">
               <strong>Student:</strong> {report?.student}
             </p>
@@ -66,14 +134,14 @@ export default function AttendanceReport() {
             </p>
             <p
               className={`mb-1 ${
-                report?.status === "Present" ? "text-green-500" : "text-red-500"
+                report?.status === "Present" ? "text-amber-500" : "text-red-500"
               }`}
             >
               <strong>Status:</strong> {report?.status}
             </p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

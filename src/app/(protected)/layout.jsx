@@ -73,7 +73,7 @@ export default function RootLayout({ children }) {
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={["dashboard"]}
+            defaultSelectedKeys={[pathname === "/dashboard" && "dashboard"]}
             onSelect={({ key }) => handleMenuItemClick(key)}
           >
             {sidebarMenuItems.map((item) =>

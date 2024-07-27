@@ -63,7 +63,7 @@ export default function PricingSection() {
                     className="mb-2 flex items-center justify-center"
                   >
                     <svg
-                      className="w-6 h-6 text-green-500 mr-2"
+                      className="w-6 h-6 text-amber-500 mr-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

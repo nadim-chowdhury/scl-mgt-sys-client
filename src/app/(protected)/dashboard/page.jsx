@@ -9,9 +9,14 @@ export default function DashboardHome() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {dashboardCards?.map((card, index) => (
-          <div key={index} className="border p-4 rounded-lg bg-amber-50">
-            <h2 className="text-lg font-semibold mb-2">{card?.title}</h2>
-            <p className="text-gray-600">{card?.description}</p>
+          <div
+            key={index}
+            className="border p-4 rounded-lg bg-amber-50 flex flex-col justify-between"
+          >
+            <div>
+              <h2 className="text-lg font-semibold mb-2">{card?.title}</h2>
+              <p className="text-gray-600">{card?.description}</p>
+            </div>
             <Link href={card?.link}>
               <span className="text-amber-600 hover:underline mt-2 inline-block">
                 {card?.linkText}

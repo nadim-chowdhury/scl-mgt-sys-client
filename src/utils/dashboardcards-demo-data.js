@@ -1,27 +1,15 @@
 export const dashboardCards = [
   {
-    title: "Students",
-    description: "Manage students, view attendance, grades, etc.",
-    link: "/students",
-    linkText: "View Students",
-  },
-  {
-    title: "Teachers",
-    description: "Manage teachers, assignments, schedules, etc.",
-    link: "/teachers",
-    linkText: "View Teachers",
-  },
-  {
-    title: "Classes",
-    description: "Manage classes, schedules, assignments, etc.",
-    link: "/classes",
-    linkText: "View Classes",
-  },
-  {
     title: "Academic Performance",
     description: "Manage classes, schedules, assignments, etc.",
     link: "/academic-performance",
     linkText: "View Academic Performance",
+  },
+  {
+    title: "Additional Classes",
+    description: "Track attendance records of students and teachers.",
+    link: "/additional-classes",
+    linkText: "Additional Classes",
   },
   {
     title: "Announcements",
@@ -42,17 +30,17 @@ export const dashboardCards = [
     linkText: "View Attendance",
   },
   {
-    title: "Additional Classes",
-    description: "Track attendance records of students and teachers.",
-    link: "/additional-classes",
-    linkText: "Additional Classes",
+    title: "Classes",
+    description: "Manage classes, schedules, assignments, etc.",
+    link: "/classes",
+    linkText: "View Classes",
   },
-  {
-    title: "Contact",
-    description: "Track contact records of students and teachers.",
-    link: "/contact",
-    linkText: "View Contact",
-  },
+  // {
+  //   title: "Contact",
+  //   description: "Track contact records of students and teachers.",
+  //   link: "/contact",
+  //   linkText: "View Contact",
+  // },
   {
     title: "Courses",
     description: "Track courses records of students and teachers.",
@@ -96,22 +84,22 @@ export const dashboardCards = [
     linkText: "View Payments",
   },
   // {
-  //   title: "Additional Profile",
-  //   description: "Track additional-profile records of students and teachers.",
-  //   link: "/additional-profile",
-  //   linkText: "View Additional Profile",
+  //   title: "Reports",
+  //   description: "Track reports records of students and teachers.",
+  //   link: "/reports",
+  //   linkText: "View reports",
   // },
-  {
-    title: "Reports",
-    description: "Track reports records of students and teachers.",
-    link: "/reports",
-    linkText: "View reports",
-  },
   {
     title: "Student Performance",
     description: "Track student-performance records of students and teachers.",
     link: "/student-performance",
     linkText: "View Student Performance",
+  },
+  {
+    title: "Students",
+    description: "Manage students, view attendance, grades, etc.",
+    link: "/students",
+    linkText: "View Students",
   },
   {
     title: "Subjects",
@@ -124,6 +112,12 @@ export const dashboardCards = [
     description: "Track submissions records of students and teachers.",
     link: "/submissions",
     linkText: "View Submissions",
+  },
+  {
+    title: "Teachers",
+    description: "Manage teachers, assignments, schedules, etc.",
+    link: "/teachers",
+    linkText: "View Teachers",
   },
   {
     title: "Timetable",

@@ -48,10 +48,7 @@ export default function Messages() {
       <Heading title="Messages" />
       <LoadingAndErrorMessage loading={loading} error={error} />
 
-      <form
-        onSubmit={handleSubmit}
-        className="mb-4 p-4 bg-white shadow rounded-lg"
-      >
+      <form onSubmit={handleSubmit} className="mb-8">
         <div className="mb-4">
           <input
             type="number"
@@ -80,13 +77,13 @@ export default function Messages() {
         </div>
         <button
           type="submit"
-          className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
         >
           Send Message
         </button>
       </form>
 
-      <ul className="bg-white shadow rounded-lg p-4">
+      <ul className="space-y-4">
         {(messages || [])?.map((msg) => (
           <li key={msg?.id} className="mb-2 border-b pb-2">
             <strong>{msg?.sender?.username}</strong> to{" "}

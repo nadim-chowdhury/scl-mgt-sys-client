@@ -30,7 +30,7 @@ export default function Submissions() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div >
       <Heading title="Submissions" />
       <LoadingAndErrorMessage loading={loading} error={error} />
 
@@ -57,7 +57,7 @@ export default function Submissions() {
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-amber-500 text-white px-4 py-2 rounded"
         >
           Submit Assignment
         </button>

@@ -6,6 +6,7 @@ import { GET_ASSIGNMENTS } from "@/graphql/query";
 import { CREATE_ASSIGNMENT, GRADE_SUBMISSION } from "@/graphql/mutation";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 import Heading from "@/components/Heading";
+import { mockAssignmentsData } from "@/utils/demoData";
 
 export default function Assignments() {
   const [title, setTitle] = useState("");
@@ -48,95 +49,111 @@ export default function Assignments() {
   return (
     <div>
       <Heading title="Assignments" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
-      <form onSubmit={handleCreateAssignment} className="mb-8 space-y-4">
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        ></textarea>
-        <input
-          type="date"
-          placeholder="Due Date"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          placeholder="Course ID"
-          value={courseId}
-          onChange={(e) => setCourseId(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+      <div className="grid grid-cols-2 gap-6 mb-8">
+        <form
+          onSubmit={handleCreateAssignment}
+          className="space-y-4 bg-indigo-50 p-6 rounded-md border"
         >
-          Create Assignment
-        </button>
-      </form>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+          <textarea
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          ></textarea>
+          <input
+            type="date"
+            placeholder="Due Date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+          <input
+            type="number"
+            placeholder="Course ID"
+            value={courseId}
+            onChange={(e) => setCourseId(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
 
-      <form onSubmit={handleGradeSubmission} className="mb-8 space-y-4">
-        <input
-          type="number"
-          placeholder="Submission ID"
-          value={submissionId}
-          onChange={(e) => setSubmissionId(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          placeholder="Grade"
-          value={grade}
-          onChange={(e) => setGrade(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <textarea
-          placeholder="Feedback"
-          value={feedback}
-          onChange={(e) => setFeedback(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        ></textarea>
-        <button
-          type="submit"
-          className="bg-green-500 text-white px-4 py-2 rounded"
-        >
-          Grade Submission
-        </button>
-      </form>
-
-      <ul className="space-y-6">
-        {(data?.assignments || [])?.map((assignment) => (
-          <li
-            key={assignment?.id}
-            className="p-4 border border-gray-300 rounded"
+          <button
+            type="submit"
+            className="bg-amber-500 text-white px-4 py-2 rounded"
           >
-            <h2 className="text-2xl font-semibold mb-2">{assignment?.title}</h2>
-            <p className="mb-4">{assignment?.description}</p>
-            <p className="mb-4">
-              <span className="font-medium">Due Date:</span>{" "}
-              {assignment?.dueDate}
-            </p>
-            <p className="mb-4">
-              <span className="font-medium">Course:</span>{" "}
-              {assignment?.course?.name}
-            </p>
-            <h3 className="text-xl font-semibold mb-2">Submissions</h3>
-            <ul className="space-y-2">
+            Create Assignment
+          </button>
+        </form>
+
+        <form
+          onSubmit={handleGradeSubmission}
+          className="space-y-4 bg-indigo-50 p-6 rounded-md border"
+        >
+          <input
+            type="number"
+            placeholder="Submission ID"
+            value={submissionId}
+            onChange={(e) => setSubmissionId(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+          <input
+            type="number"
+            placeholder="Grade"
+            value={grade}
+            onChange={(e) => setGrade(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+          <textarea
+            placeholder="Feedback"
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          ></textarea>
+          
+          <button
+            type="submit"
+            className="bg-amber-500 text-white px-4 py-2 rounded"
+          >
+            Grade Submission
+          </button>
+        </form>
+      </div>
+
+      <Heading title="All Assignments" />
+      <div className="grid grid-cols-4 gap-6">
+        {(data?.assignments || mockAssignmentsData)?.map((assignment) => (
+          <div
+            key={assignment?.id}
+            className="p-6 border rounded-md bg-amber-50"
+          >
+            <div className="">
+              <h2 className="text-2xl font-semibold mb-2">
+                {assignment?.title}
+              </h2>
+              <p className="mb-4">{assignment?.description}</p>
+              <p className="mb-4">
+                <span className="font-medium">Due Date:</span>{" "}
+                {assignment?.dueDate}
+              </p>
+              <p className="mb-4">
+                <span className="font-medium">Course:</span>{" "}
+                {assignment?.course?.name}
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <h3 className="text-xl font-semibold mb-2">Submissions</h3>
               {(assignment?.submissions || [])?.map((submission) => (
-                <li
+                <div
                   key={submission?.id}
-                  className="p-2 border border-gray-200 rounded"
+                  className=""
                 >
                   <p>
                     <span className="font-medium">Submitted by:</span>{" "}
@@ -158,12 +175,12 @@ export default function Assignments() {
                     <span className="font-medium">Feedback:</span>{" "}
                     {submission?.feedback}
                   </p>
-                </li>
+                </div>
               ))}
-            </ul>
-          </li>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

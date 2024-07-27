@@ -40,7 +40,7 @@ export default function Fees() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div>
       <Heading title="Fees" />
       <LoadingAndErrorMessage loading={loading} error={error} />
 
@@ -74,7 +74,7 @@ export default function Fees() {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
         >
           Create Fee
         </button>
@@ -103,7 +103,7 @@ export default function Fees() {
 
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
         >
           Update Fee Status
         </button>

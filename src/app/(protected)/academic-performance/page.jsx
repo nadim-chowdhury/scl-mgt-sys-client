@@ -7,6 +7,7 @@ import "chart.js/auto";
 import { GET_ACADEMIC_PERFORMANCE_REPORT } from "@/graphql/query";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
+import { mockAcademicPerformanceReport } from "@/utils/demoData";
 
 export default function AcademicPerformanceReport() {
   const [courseId, setCourseId] = useState("");
@@ -26,16 +27,16 @@ export default function AcademicPerformanceReport() {
 
   const chartData = {
     labels:
-      data?.academicPerformanceReport?.map(
+      (data?.academicPerformanceReport || mockAcademicPerformanceReport)?.map(
         (report) => report.assignmentTitle
       ) || [],
     datasets: [
       {
         label: "Average Score",
         data:
-          data?.academicPerformanceReport?.map(
-            (report) => report.averageScore
-          ) || [],
+          (
+            data?.academicPerformanceReport || mockAcademicPerformanceReport
+          )?.map((report) => report.averageScore) || [],
         backgroundColor: "rgba(75, 192, 192, 0.6)",
       },
     ],
@@ -44,9 +45,12 @@ export default function AcademicPerformanceReport() {
   return (
     <div>
       <Heading title="Academic Performance Report" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
-      <form onSubmit={handleSubmit} className="mb-8 space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4 bg-indigo-50 p-6 rounded-md border mb-8"
+      >
         <input
           type="number"
           placeholder="Course ID"
@@ -54,29 +58,34 @@ export default function AcademicPerformanceReport() {
           onChange={(e) => setCourseId(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded"
         />
+
         <button
           type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded"
+          className="bg-amber-500 text-white px-4 py-2 rounded whitespace-nowrap"
         >
           Generate Report
         </button>
       </form>
 
-      <div className="mb-8">
+      <Heading title="Report Chart" />
+      <div className="border p-6 rounded-md my-8">
         <Bar data={chartData} />
       </div>
 
-      <ul className="space-y-6">
-        {(data?.academicPerformanceReport || [])?.map((report, index) => (
-          <li key={index} className="p-4 border border-gray-300 rounded">
+      <Heading title="Report List" />
+      <div className="grid grid-cols-3 gap-6">
+        {(
+          data?.academicPerformanceReport || mockAcademicPerformanceReport
+        )?.map((report, index) => (
+          <div key={index} className="p-6 border rounded-md bg-amber-50">
             <h2 className="text-xl font-bold mb-2">
               {report?.assignmentTitle}
             </h2>
             <p className="mb-1">Submissions: {report?.submissions}</p>
             <p className="mb-1">Average Score: {report?.averageScore}</p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

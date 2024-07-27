@@ -9,7 +9,7 @@ export default function Subjects() {
   const { loading, error, data } = useQuery(GET_SUBJECTS);
 
   return (
-    <div className="max-w-3xl mx-auto bg-gray-100 p-6 rounded-md shadow-md">
+    <div >
       <Heading title="Subjects" />
       <LoadingAndErrorMessage loading={loading} error={error} />
 

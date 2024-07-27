@@ -26,7 +26,7 @@ export const studentsDemoData = [
   {
     key: "5",
     id: "S005",
-    name: "Eva Green",
+    name: "Eva amber",
     age: 23,
   },
 ];
