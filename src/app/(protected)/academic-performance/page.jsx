@@ -8,9 +8,11 @@ import { GET_ACADEMIC_PERFORMANCE_REPORT } from "@/graphql/query";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 import { mockAcademicPerformanceReport } from "@/utils/demoData";
+import { notifyError } from "@/components/common/Notifications";
 
 export default function AcademicPerformanceReport() {
   const [courseId, setCourseId] = useState("");
+  const [value, setValue] = useState("");
 
   const { loading, error, data, refetch } = useQuery(
     GET_ACADEMIC_PERFORMANCE_REPORT,
@@ -19,10 +21,16 @@ export default function AcademicPerformanceReport() {
       skip: !courseId,
     }
   );
+  console.log("data:", data);
+  console.log("error:", error);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    refetch();
+    setCourseId(value);
+    // refetch();
+    // if (error) {
+    //   notifyError("Something went wrong");
+    // }
   };
 
   const chartData = {
@@ -54,16 +62,17 @@ export default function AcademicPerformanceReport() {
         <input
           type="number"
           placeholder="Course ID"
-          value={courseId}
-          onChange={(e) => setCourseId(e.target.value)}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded"
         />
 
         <button
           type="submit"
           className="bg-amber-500 text-white px-4 py-2 rounded whitespace-nowrap"
+          disabled={loading}
         >
-          Generate Report
+          {loading ? "Loading..." : "Generate Report"}
         </button>
       </form>
 

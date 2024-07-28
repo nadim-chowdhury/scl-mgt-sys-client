@@ -207,7 +207,7 @@ export const GET_COURSES = gql`
   query GetCourses {
     courses {
       id
-      name
+      title
       description
       assignments {
         id
@@ -272,7 +272,7 @@ export const GET_VIRTUAL_CLASSES = gql`
 `;
 
 export const GET_ACADEMIC_PERFORMANCE_REPORT = gql`
-  query GetAcademicPerformanceReport($courseId: Int!) {
+  query GetAcademicPerformanceReport($courseId: Float!) {
     academicPerformanceReport(courseId: $courseId) {
       assignmentTitle
       submissions

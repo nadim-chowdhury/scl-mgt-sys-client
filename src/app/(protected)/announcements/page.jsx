@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { GET_ANNOUNCEMENTS } from "../../../graphql/query";
 import socket from "@/lib/socket";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 import Heading from "@/components/Heading";
 import { mockAnnouncementsData } from "@/utils/demoData";
+import { CREATE_ANNOUNCEMENT } from "@/graphql/mutation";
 
 export default function Announcements() {
   const [announcements, setAnnouncements] = useState(mockAnnouncementsData);
@@ -15,6 +16,7 @@ export default function Announcements() {
 
   const { loading, error, data, refetch } = useQuery(GET_ANNOUNCEMENTS);
   console.log("data:", data);
+  const [createAnnouncement] = useMutation(CREATE_ANNOUNCEMENT);
 
   useEffect(() => {
     if (data?.announcements?.length > 0) {
@@ -35,11 +37,22 @@ export default function Announcements() {
     };
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    socket.emit("createAnnouncement", { title, content });
-    setTitle("");
-    setContent("");
+    try {
+      const { data } = await createAnnouncement({
+        variables: { title, content },
+      });
+      setAnnouncements((prevAnnouncements) => [
+        ...prevAnnouncements,
+        data.createAnnouncement,
+      ]);
+      setTitle("");
+      setContent("");
+      socket.emit("createAnnouncement", data.createAnnouncement);
+    } catch (error) {
+      console.error("Error creating announcement:", error);
+    }
   };
 
   return (

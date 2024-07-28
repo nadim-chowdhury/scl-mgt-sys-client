@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_ASSIGNMENTS } from "@/graphql/query";
+import { GET_ASSIGNMENTS, GET_COURSES } from "@/graphql/query";
 import { CREATE_ASSIGNMENT, GRADE_SUBMISSION } from "@/graphql/mutation";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 import Heading from "@/components/Heading";
@@ -17,7 +17,14 @@ export default function Assignments() {
   const [grade, setGrade] = useState("");
   const [feedback, setFeedback] = useState("");
 
-  const { loading, error, data } = useQuery(GET_ASSIGNMENTS);
+  const { loading, error, data, refetch } = useQuery(GET_ASSIGNMENTS);
+  const {
+    loading: coursesLoading,
+    error: coursesError,
+    data: coursesData,
+    refetch: coursesRefetch,
+  } = useQuery(GET_COURSES);
+  console.log("coursesData:", coursesData);
   const [createAssignment] = useMutation(CREATE_ASSIGNMENT);
   const [gradeSubmission] = useMutation(GRADE_SUBMISSION);
 
@@ -44,6 +51,7 @@ export default function Assignments() {
     setSubmissionId("");
     setGrade("");
     setFeedback("");
+    refetch();
   };
 
   return (
@@ -76,13 +84,25 @@ export default function Assignments() {
             onChange={(e) => setDueDate(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded"
           />
-          <input
+          {/* <input
             type="number"
             placeholder="Course ID"
             value={courseId}
             onChange={(e) => setCourseId(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded"
-          />
+          /> */}
+          <select
+            value={courseId}
+            className="w-full p-2 border border-gray-300 rounded"
+            onChange={(e) => setCourseId(e.target.value)}
+          >
+            <option value="">Select Course Id</option>
+            {coursesData?.courses?.map((item, i) => (
+              <option key={i} value={item?.id}>
+                {item?.title}
+              </option>
+            ))}
+          </select>
 
           <button
             type="submit"
@@ -116,7 +136,7 @@ export default function Assignments() {
             onChange={(e) => setFeedback(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded"
           ></textarea>
-          
+
           <button
             type="submit"
             className="bg-amber-500 text-white px-4 py-2 rounded"
@@ -151,10 +171,7 @@ export default function Assignments() {
             <div className="space-y-2">
               <h3 className="text-xl font-semibold mb-2">Submissions</h3>
               {(assignment?.submissions || [])?.map((submission) => (
-                <div
-                  key={submission?.id}
-                  className=""
-                >
+                <div key={submission?.id} className="">
                   <p>
                     <span className="font-medium">Submitted by:</span>{" "}
                     {submission?.student.username}

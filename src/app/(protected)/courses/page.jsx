@@ -12,7 +12,8 @@ export default function Courses() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  const { loading, error, data } = useQuery(GET_COURSES);
+  const { loading, error, data, refetch } = useQuery(GET_COURSES);
+  console.log("data:", data);
   const [createCourse] = useMutation(CREATE_COURSE);
 
   const handleSubmit = async (e) => {
@@ -20,6 +21,7 @@ export default function Courses() {
     await createCourse({ variables: { name, description } });
     setName("");
     setDescription("");
+    refetch();
   };
 
   return (
@@ -57,13 +59,13 @@ export default function Courses() {
       <div className="grid grid-cols-3 gap-6">
         {(data?.courses || coursesMockData)?.map((course) => (
           <div key={course?.id} className="p-6 border rounded-md bg-amber-50">
-            <h2 className="text-2xl font-semibold mb-2">{course?.name}</h2>
+            <h2 className="text-2xl font-semibold mb-2">{course?.title}</h2>
             <p className="mb-4">{course?.description}</p>
             <h3 className="text-xl font-semibold mb-2">Assignments</h3>
 
-            <ul className="space-y-2">
+            <div className="space-y-2">
               {(course?.assignments || [])?.map((assignment) => (
-                <li
+                <div
                   key={assignment?.id}
                   className="p-2 border border-gray-200 rounded"
                 >
@@ -71,9 +73,9 @@ export default function Courses() {
                   <span className="font-medium">
                     Due: {assignment?.dueDate}
                   </span>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         ))}
       </div>

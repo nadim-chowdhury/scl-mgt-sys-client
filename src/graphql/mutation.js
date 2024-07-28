@@ -144,9 +144,9 @@ export const CREATE_INVOICE = gql`
 
 export const CREATE_COURSE = gql`
   mutation CreateCourse($name: String!, $description: String!) {
-    createCourse(name: $name, description: $description) {
+    createCourse(title: $name, description: $description) {
       id
-      name
+      title
       description
     }
   }
@@ -157,7 +157,7 @@ export const CREATE_ASSIGNMENT = gql`
     $title: String!
     $description: String!
     $dueDate: String!
-    $courseId: Int!
+    $courseId: Float!
   ) {
     createAssignment(
       title: $title
@@ -213,7 +213,7 @@ export const CREATE_VIRTUAL_CLASS = gql`
   mutation CreateVirtualClass(
     $meetingLink: String!
     $schedule: String!
-    $courseId: Int!
+    $courseId: Float!
   ) {
     createVirtualClass(
       meetingLink: $meetingLink
