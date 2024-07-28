@@ -168,7 +168,7 @@ export default function Assignments() {
               </p>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 border rounded-md p-4">
               <h3 className="text-xl font-semibold mb-2">Submissions</h3>
               {(assignment?.submissions || [])?.map((submission) => (
                 <div key={submission?.id} className="">

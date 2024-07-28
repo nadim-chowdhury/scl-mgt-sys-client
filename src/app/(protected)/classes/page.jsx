@@ -60,7 +60,7 @@ export default function Classes() {
         </button>
       </form>
 
-      <Heading title="All Classe" />
+      <Heading title="All Class" />
       <div className="grid grid-cols-4 gap-6">
         {(data?.getClasses || classesDemoData).map((classItem) => (
           <div
