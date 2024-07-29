@@ -10,12 +10,12 @@ import { mockAnnouncementsData } from "@/utils/demoData";
 import { CREATE_ANNOUNCEMENT } from "@/graphql/mutation";
 
 export default function Announcements() {
-  const [announcements, setAnnouncements] = useState(mockAnnouncementsData);
+  const [announcements, setAnnouncements] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const { loading, error, data, refetch } = useQuery(GET_ANNOUNCEMENTS);
-  console.log("data:", data);
+  console.log("🚀 ~ Announcements ~ data:", data);
   const [createAnnouncement] = useMutation(CREATE_ANNOUNCEMENT);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function Announcements() {
 
       <Heading title="Previous Announcements" />
       <div className="grid grid-cols-2 gap-6">
-        {announcements?.map((ann) => (
+        {mockAnnouncementsData?.map((ann) => (
           <div
             key={ann?.id}
             className="p-6 border rounded-md bg-amber-50 flex flex-col justify-between"

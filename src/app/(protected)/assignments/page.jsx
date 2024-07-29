@@ -18,6 +18,7 @@ export default function Assignments() {
   const [feedback, setFeedback] = useState("");
 
   const { loading, error, data, refetch } = useQuery(GET_ASSIGNMENTS);
+  console.log("🚀 ~ Assignments ~ data:", data);
   const {
     loading: coursesLoading,
     error: coursesError,
@@ -148,7 +149,7 @@ export default function Assignments() {
 
       <Heading title="All Assignments" />
       <div className="grid grid-cols-4 gap-6">
-        {(data?.assignments || mockAssignmentsData)?.map((assignment) => (
+        {mockAssignmentsData?.map((assignment) => (
           <div
             key={assignment?.id}
             className="p-6 border rounded-md bg-amber-50"
@@ -170,7 +171,7 @@ export default function Assignments() {
 
             <div className="space-y-2 border rounded-md p-4">
               <h3 className="text-xl font-semibold mb-2">Submissions</h3>
-              {(assignment?.submissions || [])?.map((submission) => (
+              {assignment?.submissions?.map((submission) => (
                 <div key={submission?.id} className="">
                   <p>
                     <span className="font-medium">Submitted by:</span>{" "}

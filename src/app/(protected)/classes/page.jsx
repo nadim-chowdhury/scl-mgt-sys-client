@@ -13,6 +13,7 @@ export default function Classes() {
   const [teacherId, setTeacherId] = useState("");
 
   const { loading, error, data } = useQuery(GET_CLASSES);
+  console.log("🚀 ~ Classes ~ data:", data);
   const [createClass] = useMutation(CREATE_CLASS);
 
   const handleSubmit = async (e) => {
@@ -62,7 +63,7 @@ export default function Classes() {
 
       <Heading title="All Class" />
       <div className="grid grid-cols-4 gap-6">
-        {(data?.getClasses || classesDemoData).map((classItem) => (
+        {classesDemoData.map((classItem) => (
           <div
             key={classItem?.id}
             className="border p-6 rounded-md bg-amber-50"

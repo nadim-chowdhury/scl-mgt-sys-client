@@ -13,7 +13,7 @@ export default function Courses() {
   const [description, setDescription] = useState("");
 
   const { loading, error, data, refetch } = useQuery(GET_COURSES);
-  console.log("data:", data);
+  console.log("🚀 ~ Courses ~ data:", data);
   const [createCourse] = useMutation(CREATE_COURSE);
 
   const handleSubmit = async (e) => {
@@ -57,7 +57,7 @@ export default function Courses() {
 
       <Heading title="All Course" />
       <div className="grid grid-cols-3 gap-6">
-        {(data?.courses || coursesMockData)?.map((course) => (
+        {coursesMockData?.map((course) => (
           <div key={course?.id} className="p-6 border rounded-md bg-amber-50">
             <h2 className="text-2xl font-semibold mb-2">{course?.title}</h2>
             <p className="mb-4">{course?.description}</p>

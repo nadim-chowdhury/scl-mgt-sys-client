@@ -6,6 +6,7 @@ import { GET_MESSAGES } from "@/graphql/query";
 import socket from "@/lib/socket";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
+import { messagesMockData } from "@/utils/demoData";
 
 export default function Messages() {
   const [messages, setMessages] = useState([]);
@@ -14,6 +15,7 @@ export default function Messages() {
   const [content, setContent] = useState("");
 
   const { loading, error, data, refetch } = useQuery(GET_MESSAGES);
+  console.log("🚀 ~ Messages ~ data:", data);
 
   useEffect(() => {
     if (data) {
@@ -48,7 +50,10 @@ export default function Messages() {
       <Heading title="Messages" />
       <LoadingAndErrorMessage loading={loading} error={error} />
 
-      <form onSubmit={handleSubmit} className="mb-8">
+      <form
+        onSubmit={handleSubmit}
+        className="mb-8 bg-indigo-50 p-6 rounded-md border"
+      >
         <div className="mb-4">
           <input
             type="number"
@@ -83,15 +88,19 @@ export default function Messages() {
         </button>
       </form>
 
-      <ul className="space-y-4">
-        {(messages || [])?.map((msg) => (
-          <li key={msg?.id} className="mb-2 border-b pb-2">
+      <Heading title="Recent Messages" />
+      <div className="space-y-4">
+        {messagesMockData?.map((msg) => (
+          <div
+            key={msg?.id}
+            className="mb-2 py-2 px-4 bg-amber-50 rounded-md border"
+          >
             <strong>{msg?.sender?.username}</strong> to{" "}
             <strong>{msg?.receiver?.username}</strong>: {msg?.content}{" "}
             <em className="text-gray-500 text-sm">at {msg?.timestamp}</em>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

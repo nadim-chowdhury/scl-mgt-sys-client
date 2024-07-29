@@ -17,6 +17,7 @@ export default function AttendanceReport() {
   const [status, setStatus] = useState("");
 
   const { loading, error, data } = useQuery(GET_ATTENDANCE_REPORT);
+  console.log("🚀 ~ AttendanceReport ~ data:", data);
   const [markAttendance] = useMutation(MARK_ATTENDANCE);
 
   const handleSubmit = async (e) => {
@@ -37,28 +38,21 @@ export default function AttendanceReport() {
 
   const chartData = {
     labels: [
-      ...new Set(
-        (data?.attendanceReport?.length > 0
-          ? data?.attendanceReport
-          : attendanceReportMockData
-        )?.map((report) => report.date)
-      ),
+      ...new Set(attendanceReportMockData?.map((report) => report.date)),
     ],
     datasets: [
       {
         label: "Present",
-        data: (data?.attendanceReport?.length > 0
-          ? data?.attendanceReport
-          : attendanceReportMockData
-        )?.map((report) => (report.status === "Present" ? 1 : 0)),
+        data: attendanceReportMockData?.map((report) =>
+          report.status === "Present" ? 1 : 0
+        ),
         backgroundColor: "rgba(75, 192, 192, 0.6)",
       },
       {
         label: "Absent",
-        data: (data?.attendanceReport?.length > 0
-          ? data?.attendanceReport
-          : attendanceReportMockData
-        )?.map((report) => (report.status === "Absent" ? 1 : 0)),
+        data: attendanceReportMockData?.map((report) =>
+          report.status === "Absent" ? 1 : 0
+        ),
         backgroundColor: "rgba(255, 99, 132, 0.6)",
       },
     ],
@@ -118,10 +112,7 @@ export default function AttendanceReport() {
 
       <Heading title="Report List" />
       <div className="grid grid-cols-4 gap-6">
-        {(data?.attendanceReport?.length > 0
-          ? data?.attendanceReport
-          : attendanceReportMockData
-        )?.map((report, index) => (
+        {attendanceReportMockData?.map((report, index) => (
           <div key={index} className="p-6 border rounded-md bg-amber-50">
             <p className="mb-1">
               <strong>Student:</strong> {report?.student}

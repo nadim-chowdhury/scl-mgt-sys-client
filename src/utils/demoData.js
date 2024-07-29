@@ -219,3 +219,165 @@ export const coursesMockData = [
     ],
   },
 ];
+
+export const feesMockData = [
+  {
+    id: 1,
+    amount: 100.0,
+    dueDate: "2024-08-01",
+    status: "Pending",
+    user: {
+      username: "john_doe",
+    },
+  },
+  {
+    id: 2,
+    amount: 150.5,
+    dueDate: "2024-08-15",
+    status: "Paid",
+    user: {
+      username: "jane_smith",
+    },
+  },
+  {
+    id: 3,
+    amount: 200.75,
+    dueDate: "2024-09-01",
+    status: "Overdue",
+    user: {
+      username: "alice_johnson",
+    },
+  },
+];
+
+export const financialReportsMockData = {
+  totalFees: 5000.0,
+  totalPayments: 3500.0,
+  outstandingAmount: 1500.0,
+};
+
+export const invoicesMockData = [
+  {
+    id: 1,
+    amount: 200.0,
+    generatedAt: "2024-07-15",
+    payment: {
+      id: 101,
+    },
+    user: {
+      username: "john_doe",
+    },
+  },
+  {
+    id: 2,
+    amount: 350.75,
+    generatedAt: "2024-07-16",
+    payment: {
+      id: 102,
+    },
+    user: {
+      username: "jane_smith",
+    },
+  },
+  {
+    id: 3,
+    amount: 500.5,
+    generatedAt: "2024-07-17",
+    payment: {
+      id: 103,
+    },
+    user: {
+      username: "alice_johnson",
+    },
+  },
+];
+
+export const messagesMockData = [
+  {
+    id: 1,
+    sender: { username: "john_doe" },
+    receiver: { username: "jane_smith" },
+    content: "Hey Jane, how are you?",
+    timestamp: "2024-07-20T10:00:00Z",
+  },
+  {
+    id: 2,
+    sender: { username: "jane_smith" },
+    receiver: { username: "john_doe" },
+    content: "Hi John! I'm good, thanks for asking.",
+    timestamp: "2024-07-20T10:05:00Z",
+  },
+  {
+    id: 3,
+    sender: { username: "john_doe" },
+    receiver: { username: "jane_smith" },
+    content: "Great to hear! Do you have any plans for the weekend?",
+    timestamp: "2024-07-20T10:10:00Z",
+  },
+];
+
+export const paymentsMockData = [
+  {
+    id: 1,
+    amount: 150.0,
+    paymentDate: "2024-07-01",
+    method: "Credit Card",
+    fee: {
+      amount: 150.0,
+      user: { username: "john_doe" },
+    },
+  },
+  {
+    id: 2,
+    amount: 200.0,
+    paymentDate: "2024-07-05",
+    method: "Bank Transfer",
+    fee: {
+      amount: 200.0,
+      user: { username: "jane_smith" },
+    },
+  },
+  {
+    id: 3,
+    amount: 75.5,
+    paymentDate: "2024-07-10",
+    method: "PayPal",
+    fee: {
+      amount: 75.5,
+      user: { username: "alice_johnson" },
+    },
+  },
+];
+
+export const paymentsHistoryMockData = [
+  {
+    id: 1,
+    amount: 150.0,
+    paymentDate: "2024-07-01",
+    method: "Credit Card",
+    fee: {
+      user: { username: "john_doe" },
+      amount: 150.0,
+    },
+  },
+  {
+    id: 2,
+    amount: 200.0,
+    paymentDate: "2024-07-05",
+    method: "Bank Transfer",
+    fee: {
+      user: { username: "jane_smith" },
+      amount: 200.0,
+    },
+  },
+  {
+    id: 3,
+    amount: 75.5,
+    paymentDate: "2024-07-10",
+    method: "PayPal",
+    fee: {
+      user: { username: "alice_johnson" },
+      amount: 75.5,
+    },
+  },
+];

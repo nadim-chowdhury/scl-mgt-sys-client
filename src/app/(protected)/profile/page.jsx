@@ -11,6 +11,7 @@ export default function Profile() {
   const { loading, error, data } = useQuery(GET_PROFILE, {
     variables: { username },
   });
+  console.log("🚀 ~ Profile ~ data:", data);
 
   const router = useRouter();
 

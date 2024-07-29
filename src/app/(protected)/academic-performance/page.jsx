@@ -21,8 +21,8 @@ export default function AcademicPerformanceReport() {
       skip: !courseId,
     }
   );
-  console.log("data:", data);
-  console.log("error:", error);
+  console.log("🚀 ~ AcademicPerformanceReport ~ data:", data);
+  console.log("🚀 ~ AcademicPerformanceReport ~ error:", error);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,17 +35,17 @@ export default function AcademicPerformanceReport() {
 
   const chartData = {
     labels:
-      (data?.academicPerformanceReport || mockAcademicPerformanceReport)?.map(
-        (report) => report.assignmentTitle
-      ) || [],
+      mockAcademicPerformanceReport?.map((report) => report.assignmentTitle) ||
+      [],
     datasets: [
       {
         label: "Average Score",
         data:
-          (
-            data?.academicPerformanceReport || mockAcademicPerformanceReport
-          )?.map((report) => report.averageScore) || [],
+          mockAcademicPerformanceReport?.map((report) => report.averageScore) ||
+          [],
         backgroundColor: "rgba(75, 192, 192, 0.6)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        fill: false,
       },
     ],
   };
@@ -83,9 +83,7 @@ export default function AcademicPerformanceReport() {
 
       <Heading title="Report List" />
       <div className="grid grid-cols-3 gap-6">
-        {(
-          data?.academicPerformanceReport || mockAcademicPerformanceReport
-        )?.map((report, index) => (
+        {mockAcademicPerformanceReport?.map((report, index) => (
           <div key={index} className="p-6 border rounded-md bg-amber-50">
             <h2 className="text-xl font-bold mb-2">
               {report?.assignmentTitle}

@@ -6,6 +6,7 @@ import { GET_INVOICES } from "../../../graphql/query";
 import { CREATE_INVOICE } from "@/graphql/mutation";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
+import { invoicesMockData } from "@/utils/demoData";
 
 export default function Invoices() {
   const [userId, setUserId] = useState("");
@@ -13,6 +14,7 @@ export default function Invoices() {
   const [amount, setAmount] = useState("");
 
   const { loading, error, data } = useQuery(GET_INVOICES);
+  console.log("🚀 ~ Invoices ~ data:", data);
   const [createInvoice] = useMutation(CREATE_INVOICE);
 
   const handleSubmit = async (e) => {
@@ -34,7 +36,10 @@ export default function Invoices() {
       <Heading title="Invoices" />
       <LoadingAndErrorMessage loading={loading} error={error} />
 
-      <form onSubmit={handleSubmit} className="mb-8">
+      <form
+        onSubmit={handleSubmit}
+        className="mb-8 bg-indigo-50 p-6 rounded-md border"
+      >
         <div className="mb-4">
           <input
             type="number"
@@ -70,9 +75,13 @@ export default function Invoices() {
         </button>
       </form>
 
-      <ul className="space-y-4">
-        {(data?.invoices || [])?.map((invoice) => (
-          <li key={invoice?.id} className="p-4 border border-gray-300 rounded">
+      <Heading title="All Invoices" />
+      <div className="grid grid-cols-4 gap-6">
+        {invoicesMockData?.map((invoice) => (
+          <div
+            key={invoice?.id}
+            className="p-4 border border-gray-300 rounded bg-amber-50"
+          >
             <p className="text-lg">
               <strong>User:</strong> {invoice?.user?.username}
             </p>
@@ -85,9 +94,9 @@ export default function Invoices() {
             <p>
               <strong>Payment ID:</strong> {invoice?.payment?.id}
             </p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

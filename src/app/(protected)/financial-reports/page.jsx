@@ -6,9 +6,11 @@ import { GET_FINANCIAL_REPORT } from "@/graphql/query";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 import "chart.js/auto";
+import { financialReportsMockData } from "@/utils/demoData";
 
 export default function FinancialReport() {
   const { loading, error, data } = useQuery(GET_FINANCIAL_REPORT);
+  console.log("🚀 ~ FinancialReport ~ data:", data);
 
   const chartData = {
     labels: ["Total Fees", "Total Payments", "Outstanding Amount"],
@@ -16,9 +18,9 @@ export default function FinancialReport() {
       {
         label: "Financial Data",
         data: [
-          data?.financialReport?.totalFees,
-          data?.financialReport?.totalPayments,
-          data?.financialReport?.outstandingAmount,
+          financialReportsMockData?.totalFees,
+          financialReportsMockData?.totalPayments,
+          financialReportsMockData?.outstandingAmount,
         ],
         backgroundColor: [
           "rgba(75, 192, 192, 0.6)",
@@ -41,15 +43,15 @@ export default function FinancialReport() {
       <div className="text-lg space-y-2">
         <p>
           <strong>Total Fees:</strong> $
-          {data?.financialReport?.totalFees?.toFixed(2)}
+          {financialReportsMockData?.totalFees?.toFixed(2)}
         </p>
         <p>
           <strong>Total Payments:</strong> $
-          {data?.financialReport?.totalPayments?.toFixed(2)}
+          {financialReportsMockData?.totalPayments?.toFixed(2)}
         </p>
         <p>
           <strong>Outstanding Amount:</strong> $
-          {data?.financialReport?.outstandingAmount?.toFixed(2)}
+          {financialReportsMockData?.outstandingAmount?.toFixed(2)}
         </p>
       </div>
     </div>

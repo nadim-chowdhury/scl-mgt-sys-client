@@ -24,8 +24,8 @@ export const sidebarMenuItems = [
   },
   { key: "invoices", icon: <FaHouseUser />, title: "Invoices" },
   { key: "messages", icon: <FaHouseUser />, title: "Messages" },
-  { key: "payment-history", icon: <FaHouseUser />, title: "Payment History" },
   { key: "payments", icon: <FaHouseUser />, title: "Payments" },
+  { key: "payment-history", icon: <FaHouseUser />, title: "Payment History" },
   {
     key: "reports",
     icon: <FaHouseUser />,

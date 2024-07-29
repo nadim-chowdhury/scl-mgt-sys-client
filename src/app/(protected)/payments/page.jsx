@@ -6,6 +6,7 @@ import { GET_PAYMENTS } from "@/graphql/query";
 import { CREATE_PAYMENT } from "@/graphql/mutation";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
+import { paymentsMockData } from "@/utils/demoData";
 
 export default function Payments() {
   const [feeId, setFeeId] = useState("");
@@ -13,6 +14,7 @@ export default function Payments() {
   const [method, setMethod] = useState("");
 
   const { loading, error, data } = useQuery(GET_PAYMENTS);
+  console.log("🚀 ~ Payments ~ data:", data);
   const [createPayment] = useMutation(CREATE_PAYMENT);
 
   const handleCreatePayment = async (e) => {
@@ -30,7 +32,10 @@ export default function Payments() {
       <Heading title="Payments" />
       <LoadingAndErrorMessage loading={loading} error={error} />
 
-      <form onSubmit={handleCreatePayment} className="mb-8">
+      <form
+        onSubmit={handleCreatePayment}
+        className="mb-8 bg-indigo-50 p-6 rounded-md border"
+      >
         <div className="mb-4">
           <input
             type="number"
@@ -66,9 +71,13 @@ export default function Payments() {
         </button>
       </form>
 
-      <ul className="space-y-4">
-        {(data?.payments || [])?.map((payment) => (
-          <li key={payment?.id} className="p-4 border border-gray-300 rounded">
+      <Heading title="All Payments" />
+      <div className="grid grid-cols-4 gap-6">
+        {paymentsMockData?.map((payment) => (
+          <div
+            key={payment?.id}
+            className="p-4 border border-gray-300 rounded bg-amber-50"
+          >
             <p className="text-lg">
               <strong>Fee:</strong> {payment?.fee?.amount}
             </p>
@@ -84,9 +93,9 @@ export default function Payments() {
             <p>
               <strong>Method:</strong> {payment?.method}
             </p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
