@@ -34,9 +34,7 @@ export default function PricingSection() {
     <section className="py-20 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Pricing Plans
-          </h2>
+          <h2 className="text-3xl font-extrabold ">Pricing Plans</h2>
           <p className="mt-4 text-lg text-gray-600">
             Choose the plan that&apos;s right for your school.
           </p>
@@ -49,16 +47,16 @@ export default function PricingSection() {
                 plan.popular ? "border-4 border-amber-500" : ""
               }`}
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+              <h3 className="text-2xl font-bold  mb-4 text-center">
                 {plan.name}
               </h3>
               <p className="text-center text-gray-600 mb-6">{plan.price}</p>
               <p className="text-center text-gray-500 mb-6">
                 {plan.description}
               </p>
-              <ul className="text-gray-600 mb-6">
+              <div className="text-gray-600 mb-6">
                 {plan.features.map((feature, index) => (
-                  <li
+                  <div
                     key={index}
                     className="mb-2 flex items-center justify-center"
                   >
@@ -77,9 +75,9 @@ export default function PricingSection() {
                       ></path>
                     </svg>
                     {feature}
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
               <div className="text-center">
                 <a
                   href="/sign-up"
@@ -94,9 +92,7 @@ export default function PricingSection() {
           ))}
         </div>
         <div className="text-center mt-12">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            Special Offers
-          </h3>
+          <h3 className="text-2xl font-bold  mb-4">Special Offers</h3>
           <p className="text-lg text-gray-600">
             Sign up now and get 20% off your first year! Use code:{" "}
             <span className="font-bold">SCHOOL20</span>

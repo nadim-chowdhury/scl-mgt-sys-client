@@ -44,7 +44,7 @@ export default function Fees() {
   return (
     <div>
       <Heading title="Fees" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
       <div className="grid grid-cols-2 gap-6">
         <form
@@ -57,7 +57,7 @@ export default function Fees() {
               placeholder="User ID"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="form__input__field"
             />
           </div>
           <div className="mb-4">
@@ -66,7 +66,7 @@ export default function Fees() {
               placeholder="Amount"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="form__input__field"
             />
           </div>
           <div className="mb-4">
@@ -75,13 +75,10 @@ export default function Fees() {
               placeholder="Due Date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="form__input__field"
             />
           </div>
-          <button
-            type="submit"
-            className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
-          >
+          <button type="submit" className="form__submit__button">
             Create Fee
           </button>
         </form>
@@ -96,7 +93,7 @@ export default function Fees() {
               placeholder="Fee ID"
               value={feeId}
               onChange={(e) => setFeeId(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="form__input__field"
             />
           </div>
 
@@ -106,14 +103,11 @@ export default function Fees() {
               placeholder="Status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="form__input__field"
             />
           </div>
 
-          <button
-            type="submit"
-            className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
-          >
+          <button type="submit" className="form__submit__button">
             Update Fee Status
           </button>
         </form>
@@ -122,10 +116,7 @@ export default function Fees() {
       <Heading title="Created Fees" />
       <div className="grid grid-cols-4 gap-6">
         {feesMockData?.map((fee) => (
-          <div
-            key={fee?.id}
-            className="p-4 border border-gray-300 rounded bg-amber-50"
-          >
+          <div key={fee?.id} className="p-4 border  rounded bg-amber-50">
             <p className="text-lg">
               <strong>User:</strong> {fee?.user?.username}
             </p>

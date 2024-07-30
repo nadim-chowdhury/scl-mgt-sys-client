@@ -41,15 +41,15 @@ export default function AllStudents() {
   return (
     <div>
       <Heading title="Students" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
-      <ul>
+      <div>
         {data?.students?.map((student) => (
-          <li key={student?.id} className="p-2 border-b border-gray-300">
+          <div key={student?.id} className="p-2 border-b ">
             {student?.name} ({student?.age} years old)
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
 
       <Table
         columns={columns}
@@ -57,6 +57,7 @@ export default function AllStudents() {
         pagination={paginationConfig}
         rowKey="id"
         className="border rounded-md"
+        rowClassName="bg-amber-50"
       />
     </div>
   );

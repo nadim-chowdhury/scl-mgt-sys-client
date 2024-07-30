@@ -38,7 +38,7 @@ export default function Login() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg mx-4">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-3xl font-extrabold ">
             Sign in to your account
           </h2>
         </div>
@@ -56,7 +56,7 @@ export default function Login() {
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 border  placeholder-gray-500  rounded-t-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
                   placeholder="Email"
                 />
               </div>
@@ -71,7 +71,7 @@ export default function Login() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+                  className="relative block w-full px-3 py-2 border  placeholder-gray-500  rounded-b-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
               </div>
@@ -83,12 +83,9 @@ export default function Login() {
                   id="remember_me"
                   name="remember_me"
                   type="checkbox"
-                  className="w-4 h-4 bg-amber-600 border-gray-300 rounded"
+                  className="w-4 h-4 bg-amber-600  rounded"
                 />
-                <label
-                  htmlFor="remember_me"
-                  className="block ml-2 text-sm text-gray-900"
-                >
+                <label htmlFor="remember_me" className="block ml-2 text-sm ">
                   Remember me
                 </label>
               </div>
@@ -96,7 +93,7 @@ export default function Login() {
               <div className="text-sm">
                 <Link
                   href="#"
-                  className="font-medium text-amber-600 hover:text-amber-500"
+                  className="font-medium text-amber-500 hover:text-amber-500"
                 >
                   Forgot your password?
                 </Link>
@@ -107,7 +104,7 @@ export default function Login() {
               <div className="flex items-center gap-2">
                 <button
                   type="submit"
-                  className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-500 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   Log in
                 </button>
@@ -115,7 +112,7 @@ export default function Login() {
                 <Link href="/register">
                   <button
                     type="button"
-                    className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-500 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
                   >
                     Register
                   </button>
@@ -123,7 +120,7 @@ export default function Login() {
               </div>
 
               <Link href="/" className="text-white">
-                <div className="flex justify-center mt-2 text-sm bg-amber-700 rounded-md py-2">
+                <div className="flex justify-center mt-2 text-sm bg-amber-600 rounded-md py-2">
                   Return Home
                 </div>
               </Link>

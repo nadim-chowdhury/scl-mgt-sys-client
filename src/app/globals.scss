@@ -35,3 +35,11 @@
   border-radius: 12px;
   border: 2px solid var(--primary);
 }
+
+.form__submit__button {
+  @apply py-2 px-4 border border-transparent rounded-md text-sm font-medium text-white bg-amber-500 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500;
+}
+
+.form__input__field {
+  @apply mt-1 block w-full px-3 py-2 border  rounded-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm;
+}

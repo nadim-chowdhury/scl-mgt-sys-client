@@ -40,7 +40,7 @@ export default function Classes() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+          className="relative block w-full px-3 py-2 border  placeholder-gray-500  rounded-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
           placeholder="Class Name"
         />
         <input
@@ -49,14 +49,11 @@ export default function Classes() {
           type="text"
           value={teacherId}
           onChange={(e) => setTeacherId(e.target.value)}
-          className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+          className="relative block w-full px-3 py-2 border  placeholder-gray-500  rounded-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
           placeholder="Teacher ID"
         />
 
-        <button
-          type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded"
-        >
+        <button type="submit" className="form__submit__button">
           Add Class
         </button>
       </form>

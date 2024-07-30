@@ -48,7 +48,7 @@ export default function Messages() {
   return (
     <div>
       <Heading title="Messages" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
       <form
         onSubmit={handleSubmit}
@@ -60,7 +60,7 @@ export default function Messages() {
             placeholder="Sender ID"
             value={senderId}
             onChange={(e) => setSenderId(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
         </div>
         <div className="mb-4">
@@ -69,7 +69,7 @@ export default function Messages() {
             placeholder="Receiver ID"
             value={receiverId}
             onChange={(e) => setReceiverId(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
         </div>
         <div className="mb-4">
@@ -77,13 +77,10 @@ export default function Messages() {
             placeholder="Message Content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           ></textarea>
         </div>
-        <button
-          type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
-        >
+        <button type="submit" className="form__submit__button">
           Send Message
         </button>
       </form>

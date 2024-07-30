@@ -30,7 +30,7 @@ export default function Payments() {
   return (
     <div>
       <Heading title="Payments" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
       <form
         onSubmit={handleCreatePayment}
@@ -42,7 +42,7 @@ export default function Payments() {
             placeholder="Fee ID"
             value={feeId}
             onChange={(e) => setFeeId(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
         </div>
         <div className="mb-4">
@@ -51,7 +51,7 @@ export default function Payments() {
             placeholder="Amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
         </div>
         <div className="mb-4">
@@ -60,13 +60,10 @@ export default function Payments() {
             placeholder="Method"
             value={method}
             onChange={(e) => setMethod(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
         </div>
-        <button
-          type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
-        >
+        <button type="submit" className="form__submit__button">
           Create Payment
         </button>
       </form>
@@ -74,10 +71,7 @@ export default function Payments() {
       <Heading title="All Payments" />
       <div className="grid grid-cols-4 gap-6">
         {paymentsMockData?.map((payment) => (
-          <div
-            key={payment?.id}
-            className="p-4 border border-gray-300 rounded bg-amber-50"
-          >
+          <div key={payment?.id} className="p-4 border  rounded bg-amber-50">
             <p className="text-lg">
               <strong>Fee:</strong> {payment?.fee?.amount}
             </p>

@@ -6,9 +6,7 @@ export default function BenefitsSection() {
     <section className="py-20 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Key Benefits
-          </h2>
+          <h2 className="text-3xl font-extrabold ">Key Benefits</h2>
           <p className="mt-4 text-lg text-gray-600">
             Discover how our system can improve your school&apos;s efficiency,
             enhance learning, and simplify management.

@@ -38,13 +38,11 @@ export default function Register() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg mx-4">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Create your account
-          </h2>
+          <h2 className="mt-6 text-3xl font-extrabold ">Create your account</h2>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
@@ -55,7 +53,7 @@ export default function Register() {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 border  placeholder-gray-500  rounded-t-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
                 placeholder="Email"
               />
             </div>
@@ -70,7 +68,7 @@ export default function Register() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
+                className="relative block w-full px-3 py-2 border  placeholder-gray-500  focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>
@@ -84,7 +82,7 @@ export default function Register() {
                 name="role"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm cursor-pointer"
+                className="relative block w-full px-3 py-2 border  placeholder-gray-500  rounded-b-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm cursor-pointer"
               >
                 <option value="">Select Role</option>
                 <option value="student">Student</option>
@@ -98,7 +96,7 @@ export default function Register() {
             <div className="flex items-center gap-2">
               <button
                 type="submit"
-                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-500 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
               >
                 Register
               </button>
@@ -106,7 +104,7 @@ export default function Register() {
               <Link href="/login">
                 <button
                   type="button"
-                  className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap"
+                  className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-500 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 whitespace-nowrap"
                 >
                   Log in
                 </button>
@@ -114,7 +112,7 @@ export default function Register() {
             </div>
 
             <Link href="/" className="text-white">
-              <div className="flex justify-center mt-2 text-sm bg-amber-700 rounded-md py-2">
+              <div className="flex justify-center mt-2 text-sm bg-amber-600 rounded-md py-2">
                 Return Home
               </div>
             </Link>

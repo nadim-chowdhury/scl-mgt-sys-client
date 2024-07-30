@@ -5,7 +5,7 @@ export default function Testimonials() {
   return (
     <div className="py-20 container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center">
-        <h2 className="text-3xl font-extrabold text-gray-900">Testimonials</h2>
+        <h2 className="text-3xl font-extrabold ">Testimonials</h2>
         <p className="mt-4 text-lg text-gray-600">
           Hear from our satisfied users and see how our system has made a
           difference for them.

@@ -45,7 +45,7 @@ export default function FAQSection() {
     <section className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900">
+          <h2 className="text-3xl font-extrabold ">
             Frequently Asked Questions
           </h2>
           <p className="mt-4 text-lg text-gray-600">
@@ -60,9 +60,7 @@ export default function FAQSection() {
                 className="flex items-center justify-between w-full py-4 px-6 bg-gray-100 rounded-lg focus:outline-none"
                 onClick={() => toggleAccordion(index)}
               >
-                <span className="text-lg font-semibold text-gray-900">
-                  {faq.question}
-                </span>
+                <span className="text-lg font-semibold ">{faq.question}</span>
                 <svg
                   className={`w-6 h-6 transition-transform transform ${
                     expandedIndex === index ? "rotate-180" : "rotate-0"

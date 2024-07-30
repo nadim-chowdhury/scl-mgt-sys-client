@@ -72,26 +72,26 @@ export default function AttendanceReport() {
           placeholder="Class ID"
           value={classId}
           onChange={(e) => setClassId(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded w-full"
+          className="form__input__field"
         />
         <input
           type="number"
           placeholder="Student ID"
           value={studentId}
           onChange={(e) => setStudentId(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded w-full"
+          className="form__input__field"
         />
         <input
           type="date"
           placeholder="Date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded w-full"
+          className="form__input__field"
         />
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded w-full"
+          className="form__input__field"
         >
           <option value="Present">Present</option>
           <option value="Absent">Absent</option>

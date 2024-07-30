@@ -70,31 +70,31 @@ export default function Assignments() {
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
           <textarea
             placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           ></textarea>
           <input
             type="date"
             placeholder="Due Date"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
           {/* <input
             type="number"
             placeholder="Course ID"
             value={courseId}
             onChange={(e) => setCourseId(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           /> */}
           <select
             value={courseId}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
             onChange={(e) => setCourseId(e.target.value)}
           >
             <option value="">Select Course Id</option>
@@ -105,10 +105,7 @@ export default function Assignments() {
             ))}
           </select>
 
-          <button
-            type="submit"
-            className="bg-amber-500 text-white px-4 py-2 rounded"
-          >
+          <button type="submit" className="form__submit__button">
             Create Assignment
           </button>
         </form>
@@ -122,26 +119,23 @@ export default function Assignments() {
             placeholder="Submission ID"
             value={submissionId}
             onChange={(e) => setSubmissionId(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
           <input
             type="number"
             placeholder="Grade"
             value={grade}
             onChange={(e) => setGrade(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
           <textarea
             placeholder="Feedback"
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           ></textarea>
 
-          <button
-            type="submit"
-            className="bg-amber-500 text-white px-4 py-2 rounded"
-          >
+          <button type="submit" className="form__submit__button">
             Grade Submission
           </button>
         </form>

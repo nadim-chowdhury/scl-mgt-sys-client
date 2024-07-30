@@ -34,7 +34,7 @@ export default function Invoices() {
   return (
     <div>
       <Heading title="Invoices" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
       <form
         onSubmit={handleSubmit}
@@ -46,7 +46,7 @@ export default function Invoices() {
             placeholder="User ID"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
         </div>
         <div className="mb-4">
@@ -55,7 +55,7 @@ export default function Invoices() {
             placeholder="Payment ID"
             value={paymentId}
             onChange={(e) => setPaymentId(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
         </div>
         <div className="mb-4">
@@ -64,13 +64,10 @@ export default function Invoices() {
             placeholder="Amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="form__input__field"
           />
         </div>
-        <button
-          type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
-        >
+        <button type="submit" className="form__submit__button">
           Create Invoice
         </button>
       </form>
@@ -78,10 +75,7 @@ export default function Invoices() {
       <Heading title="All Invoices" />
       <div className="grid grid-cols-4 gap-6">
         {invoicesMockData?.map((invoice) => (
-          <div
-            key={invoice?.id}
-            className="p-4 border border-gray-300 rounded bg-amber-50"
-          >
+          <div key={invoice?.id} className="p-4 border  rounded bg-amber-50">
             <p className="text-lg">
               <strong>User:</strong> {invoice?.user?.username}
             </p>

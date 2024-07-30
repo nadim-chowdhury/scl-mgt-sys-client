@@ -26,19 +26,19 @@ export const sidebarMenuItems = [
   { key: "messages", icon: <FaHouseUser />, title: "Messages" },
   { key: "payments", icon: <FaHouseUser />, title: "Payments" },
   { key: "payment-history", icon: <FaHouseUser />, title: "Payment History" },
-  {
-    key: "reports",
-    icon: <FaHouseUser />,
-    title: "Reports",
-    subMenu: [
-      { key: "financial", icon: <FaHouseUser />, title: "Financial" },
-      {
-        key: "student-performance",
-        icon: <FaHouseUser />,
-        title: "Student Performance",
-      },
-    ],
-  },
+  // {
+  //   key: "reports",
+  //   icon: <FaHouseUser />,
+  //   title: "Reports",
+  //   subMenu: [
+  //     { key: "financial", icon: <FaHouseUser />, title: "Financial" },
+  //     {
+  //       key: "student-performance",
+  //       icon: <FaHouseUser />,
+  //       title: "Student Performance",
+  //     },
+  //   ],
+  // },
   { key: "students", icon: <HiMiniUserGroup />, title: "Students" },
   { key: "subjects", icon: <FaHouseUser />, title: "Subjects" },
   { key: "submissions", icon: <FaHouseUser />, title: "Submissions" },

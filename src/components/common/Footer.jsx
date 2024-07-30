@@ -7,33 +7,33 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-            <ul className="list-none">
-              <li className="mb-2">
+            <div className="list-none">
+              <div className="mb-2">
                 <Link href="#" className="hover:text-gray-400">
                   Features
                 </Link>
-              </li>
-              <li className="mb-2">
+              </div>
+              <div className="mb-2">
                 <Link href="#" className="hover:text-gray-400">
                   Pricing
                 </Link>
-              </li>
-              <li className="mb-2">
+              </div>
+              <div className="mb-2">
                 <Link href="#" className="hover:text-gray-400">
                   About Us
                 </Link>
-              </li>
-              <li className="mb-2">
+              </div>
+              <div className="mb-2">
                 <Link href="#" className="hover:text-gray-400">
                   Contact
                 </Link>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4">Social Media</h3>
-            <ul className="list-none">
-              <li className="mb-2">
+            <div className="list-none">
+              <div className="mb-2">
                 <Link
                   href="https://facebook.com"
                   target="_blank"
@@ -42,8 +42,8 @@ export default function Footer() {
                 >
                   Facebook
                 </Link>
-              </li>
-              <li className="mb-2">
+              </div>
+              <div className="mb-2">
                 <Link
                   href="https://twitter.com"
                   target="_blank"
@@ -52,8 +52,8 @@ export default function Footer() {
                 >
                   Twitter
                 </Link>
-              </li>
-              <li className="mb-2">
+              </div>
+              <div className="mb-2">
                 <Link
                   href="https://linkedin.com"
                   target="_blank"
@@ -62,8 +62,8 @@ export default function Footer() {
                 >
                   LinkedIn
                 </Link>
-              </li>
-              <li className="mb-2">
+              </div>
+              <div className="mb-2">
                 <Link
                   href="https://instagram.com"
                   target="_blank"
@@ -72,8 +72,8 @@ export default function Footer() {
                 >
                   Instagram
                 </Link>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4">Newsletter</h3>

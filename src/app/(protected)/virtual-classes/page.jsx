@@ -6,6 +6,7 @@ import { CREATE_VIRTUAL_CLASS, UPDATE_SCHEDULE } from "@/graphql/mutation";
 import { GET_VIRTUAL_CLASSES } from "@/graphql/query";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
+import { virtualClassesDemoData } from "@/utils/demoData";
 
 export default function VirtualClasses() {
   const [meetingLink, setMeetingLink] = useState("");
@@ -14,6 +15,7 @@ export default function VirtualClasses() {
   const [classId, setClassId] = useState("");
 
   const { loading, error, data } = useQuery(GET_VIRTUAL_CLASSES);
+  console.log("🚀 ~ VirtualClasses ~ data:", data);
   const [createVirtualClass] = useMutation(CREATE_VIRTUAL_CLASS);
   const [updateSchedule] = useMutation(UPDATE_SCHEDULE);
 
@@ -39,66 +41,71 @@ export default function VirtualClasses() {
       <h1 className="text-3xl font-bold mb-6"></h1>
 
       <Heading title="Virtual Classes" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
-      <form onSubmit={handleCreateVirtualClass} className="mb-8 space-y-4">
-        <input
-          type="text"
-          placeholder="Meeting Link"
-          value={meetingLink}
-          onChange={(e) => setMeetingLink(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="datetime-local"
-          placeholder="Schedule"
-          value={schedule}
-          onChange={(e) => setSchedule(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="number"
-          placeholder="Course ID"
-          value={courseId}
-          onChange={(e) => setCourseId(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <button
-          type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded"
+      <div className="grid grid-cols-2 gap-6">
+        <form
+          onSubmit={handleCreateVirtualClass}
+          className="mb-8 space-y-4 bg-indigo-50 p-6 rounded-md border"
         >
-          Create Virtual Class
-        </button>
-      </form>
+          <input
+            type="text"
+            placeholder="Meeting Link"
+            value={meetingLink}
+            onChange={(e) => setMeetingLink(e.target.value)}
+            className="form__input__field"
+          />
+          <input
+            type="datetime-local"
+            placeholder="Schedule"
+            value={schedule}
+            onChange={(e) => setSchedule(e.target.value)}
+            className="form__input__field"
+          />
+          <input
+            type="number"
+            placeholder="Course ID"
+            value={courseId}
+            onChange={(e) => setCourseId(e.target.value)}
+            className="form__input__field"
+          />
 
-      <form onSubmit={handleUpdateSchedule} className="mb-8 space-y-4">
-        <input
-          type="number"
-          placeholder="Class ID"
-          value={classId}
-          onChange={(e) => setClassId(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <input
-          type="datetime-local"
-          placeholder="New Schedule"
-          value={schedule}
-          onChange={(e) => setSchedule(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
-        />
-        <button
-          type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded"
+          <button type="submit" className="form__submit__button">
+            Create Virtual Class
+          </button>
+        </form>
+
+        <form
+          onSubmit={handleUpdateSchedule}
+          className="mb-8 space-y-4 bg-indigo-50 p-6 rounded-md border"
         >
-          Update Schedule
-        </button>
-      </form>
+          <input
+            type="number"
+            placeholder="Class ID"
+            value={classId}
+            onChange={(e) => setClassId(e.target.value)}
+            className="form__input__field"
+          />
+          <input
+            type="datetime-local"
+            placeholder="New Schedule"
+            value={schedule}
+            onChange={(e) => setSchedule(e.target.value)}
+            className="form__input__field"
+          />
 
-      <ul className="space-y-6">
-        {(data?.virtualClasses || [])?.map((virtualClass) => (
-          <li
+          <button type="submit" className="form__submit__button">
+            Update Schedule
+          </button>
+        </form>
+      </div>
+
+      <Heading title="Recent Virtual Classes" />
+      <div className="grid grid-cols-4 gap-6">
+        {virtualClassesDemoData?.map((virtualClass) => (
+          <div
             key={virtualClass?.id}
-            className="p-4 border border-gray-300 rounded"
+            className="p-4 border  rounded bg-amber-50"
           >
             <p className="mb-2">
               Meeting Link:{" "}
@@ -113,9 +120,9 @@ export default function VirtualClasses() {
             </p>
             <p className="mb-1">Schedule: {virtualClass?.schedule}</p>
             <p className="mb-1">Course: {virtualClass?.course?.name}</p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

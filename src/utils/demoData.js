@@ -381,3 +381,93 @@ export const paymentsHistoryMockData = [
     },
   },
 ];
+
+export const subjectsDemoData = [
+  {
+    id: "1",
+    name: "Mathematics",
+    class: { name: "Class 1" },
+  },
+  {
+    id: "2",
+    name: "English",
+    class: { name: "Class 2" },
+  },
+  {
+    id: "3",
+    name: "Science",
+    class: { name: "Class 3" },
+  },
+];
+
+export const submissionsDemoData = [
+  {
+    id: "1",
+    assignment: { title: "Math Assignment 1" },
+    student: { username: "student1" },
+    submittedAt: "2024-07-30T10:00:00Z",
+    content: "Here is my math assignment.",
+  },
+  {
+    id: "2",
+    assignment: { title: "English Essay" },
+    student: { username: "student2" },
+    submittedAt: "2024-07-29T14:00:00Z",
+    content: "This is my essay on Shakespeare.",
+  },
+  {
+    id: "3",
+    assignment: { title: "Science Project" },
+    student: { username: "student3" },
+    submittedAt: "2024-07-28T16:00:00Z",
+    content: "Science project on renewable energy.",
+  },
+];
+
+export const timetablesDemoData = [
+  {
+    id: "1",
+    subject: { name: "Math" },
+    class: { name: "Class 1" },
+    day: "Monday",
+    startTime: "08:00",
+    endTime: "09:00",
+  },
+  {
+    id: "2",
+    subject: { name: "English" },
+    class: { name: "Class 2" },
+    day: "Tuesday",
+    startTime: "10:00",
+    endTime: "11:00",
+  },
+  {
+    id: "3",
+    subject: { name: "Science" },
+    class: { name: "Class 3" },
+    day: "Wednesday",
+    startTime: "12:00",
+    endTime: "13:00",
+  },
+];
+
+export const virtualClassesDemoData = [
+  {
+    id: "1",
+    meetingLink: "https://zoom.us/j/1234567890",
+    schedule: "2024-08-01T10:00:00Z",
+    course: { name: "Math Course" },
+  },
+  {
+    id: "2",
+    meetingLink: "https://zoom.us/j/0987654321",
+    schedule: "2024-08-02T14:00:00Z",
+    course: { name: "English Course" },
+  },
+  {
+    id: "3",
+    meetingLink: "https://zoom.us/j/1122334455",
+    schedule: "2024-08-03T16:00:00Z",
+    course: { name: "Science Course" },
+  },
+];

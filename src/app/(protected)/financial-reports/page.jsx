@@ -34,7 +34,7 @@ export default function FinancialReport() {
   return (
     <div>
       <Heading title="Financial Report" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
       <div className="mb-8">
         <Pie data={chartData} />

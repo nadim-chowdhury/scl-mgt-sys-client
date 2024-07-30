@@ -15,9 +15,7 @@ export default function FeaturesSection() {
     <section className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Our Features
-          </h2>
+          <h2 className="text-3xl font-extrabold ">Our Features</h2>
           <p className="mt-4 text-lg text-gray-600">
             Discover the powerful features our school management system offers
             to streamline your educational institution.
@@ -29,7 +27,7 @@ export default function FeaturesSection() {
               <div className="flex items-center justify-center mb-4 text-amber-500">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">
+              <h3 className="text-xl font-bold  mb-2 text-center">
                 {feature.title}
               </h3>
               <p className="text-gray-600 mb-4 text-center">

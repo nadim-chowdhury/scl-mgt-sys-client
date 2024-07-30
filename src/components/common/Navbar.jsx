@@ -64,21 +64,19 @@ export default function Navbar() {
         >
           <div className="p-4 flex flex-col gap-2">
             <Link href="#">
-              <span className="text-gray-800 hover:text-gray-900">
-                Features
-              </span>
+              <span className="text-gray-800 hover:">Features</span>
             </Link>
 
             <Link href="#">
-              <span className="text-gray-800 hover:text-gray-900">Pricing</span>
+              <span className="text-gray-800 hover:">Pricing</span>
             </Link>
 
             <Link href="#">
-              <span className="text-gray-800 hover:text-gray-900">About</span>
+              <span className="text-gray-800 hover:">About</span>
             </Link>
 
             <Link href="#">
-              <span className="text-gray-800 hover:text-gray-900">Contact</span>
+              <span className="text-gray-800 hover:">Contact</span>
             </Link>
           </div>
 

@@ -64,12 +64,12 @@ export default function AcademicPerformanceReport() {
           placeholder="Course ID"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="form__input__field"
         />
 
         <button
           type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded whitespace-nowrap"
+          className="form__submit__button whitespace-nowrap"
           disabled={loading}
         >
           {loading ? "Loading..." : "Generate Report"}

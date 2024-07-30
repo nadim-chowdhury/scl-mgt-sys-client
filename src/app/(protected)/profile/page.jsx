@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Profile() {
-  const [username, setUsername] = useState("sydykeqij");
+  const [username, setUsername] = useState("");
 
   const { loading, error, data } = useQuery(GET_PROFILE, {
     variables: { username },
@@ -29,37 +29,38 @@ export default function Profile() {
   //   );
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="w-full max-w-md p-8 space-y-8 rounded-lg mx-4">
+    <div className="flex items-center justify-center h-full">
+      <div className="w-full max-w-md p-8 space-y-8 rounded-lg">
         <div className="text-center">
-          <h1 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Profile
-          </h1>
+          <h1 className="text-3xl font-extrabold ">Profile</h1>
         </div>
 
         <div className="mt-8 space-y-6">
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div className="py-2 flex items-center gap-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Username:
-              </label>
-              <p className="text-amber-900 font-bold">
-                {data?.profile?.username}
-              </p>
-            </div>
+          <div className="py-3 px-6 flex items-center gap-4 bg-amber-50 rounded-md border">
+            <label className="block text-sm font-medium text-gray-700">
+              Name:
+            </label>
+            <p className="text-amber-900 font-bold">{data?.profile?.email}</p>
+          </div>
 
-            <div className="py-2 flex items-center gap-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Role:
-              </label>
-              <p className="text-amber-900 font-bold">{data?.profile?.role}</p>
-            </div>
+          <div className="py-3 px-6 flex items-center gap-4 bg-amber-50 rounded-md border">
+            <label className="block text-sm font-medium text-gray-700">
+              Email:
+            </label>
+            <p className="text-amber-900 font-bold">{data?.profile?.email}</p>
+          </div>
+
+          <div className="py-3 px-6 flex items-center gap-4 bg-amber-50 rounded-md border">
+            <label className="block text-sm font-medium text-gray-700">
+              Role:
+            </label>
+            <p className="text-amber-900 font-bold">{data?.profile?.role}</p>
           </div>
 
           <div className="flex justify-center mt-4">
             <button
               onClick={() => router.push("/")}
-              className="relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-amber-600 border border-transparent rounded-md group hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2"
+              className="px-4 py-2 text-sm font-medium text-white bg-amber-600 rounded-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 grow"
             >
               Return Home
             </button>

@@ -40,7 +40,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="mt-1 focus:ring-amber-500 focus:border-amber-500 block w-full  sm:text-sm border-gray-300 rounded-md"
+            className="mt-1 focus:ring-amber-500 focus:border-amber-500 block w-full  sm:text-sm  rounded-md"
           />
         </div>
         <div>
@@ -57,7 +57,7 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="mt-1 focus:ring-amber-500 focus:border-amber-500 block w-full  sm:text-sm border-gray-300 rounded-md"
+            className="mt-1 focus:ring-amber-500 focus:border-amber-500 block w-full  sm:text-sm  rounded-md"
           />
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           required
-          className="mt-1 focus:ring-amber-500 focus:border-amber-500 block w-full  sm:text-sm border-gray-300 rounded-md"
+          className="mt-1 focus:ring-amber-500 focus:border-amber-500 block w-full  sm:text-sm  rounded-md"
         />
       </div>
       <div className="mt-6">

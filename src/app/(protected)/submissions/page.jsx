@@ -6,6 +6,7 @@ import { CREATE_SUBMISSION } from "@/graphql/mutation";
 import { GET_SUBMISSIONS } from "@/graphql/query";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
+import { submissionsDemoData } from "@/utils/demoData";
 
 export default function Submissions() {
   const [content, setContent] = useState("");
@@ -30,45 +31,43 @@ export default function Submissions() {
   };
 
   return (
-    <div >
+    <div>
       <Heading title="Submissions" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
-      <form onSubmit={handleSubmit} className="mb-8 space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="mb-8 space-y-4 bg-indigo-50 p-6 rounded-md border"
+      >
         <textarea
           placeholder="Content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="form__input__field"
         ></textarea>
         <input
           type="number"
           placeholder="Assignment ID"
           value={assignmentId}
           onChange={(e) => setAssignmentId(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="form__input__field"
         />
         <input
           type="number"
           placeholder="Student ID"
           value={studentId}
           onChange={(e) => setStudentId(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="form__input__field"
         />
-        <button
-          type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded"
-        >
+        <button type="submit" className="form__submit__button">
           Submit Assignment
         </button>
       </form>
 
-      <ul className="space-y-6">
-        {(data?.submissions || [])?.map((submission) => (
-          <li
-            key={submission?.id}
-            className="p-4 border border-gray-300 rounded"
-          >
+      <Heading title="Recent Submissions" />
+      <div className="grid grid-cols-3 gap-6">
+        {submissionsDemoData?.map((submission) => (
+          <div key={submission?.id} className="p-4 border  rounded bg-amber-50">
             <h2 className="text-2xl font-semibold mb-2">
               {submission?.assignment?.title}
             </h2>
@@ -84,9 +83,9 @@ export default function Submissions() {
               <span className="font-medium">Content:</span>{" "}
               {submission?.content}
             </p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

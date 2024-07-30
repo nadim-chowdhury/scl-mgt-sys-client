@@ -69,19 +69,16 @@ export default function Announcements() {
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded"
+          className="form__input__field"
         />
         <textarea
           placeholder="Content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded h-32"
+          className="form__input__field h-32"
         />
 
-        <button
-          type="submit"
-          className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
-        >
+        <button type="submit" className="form__submit__button">
           Create Announcement
         </button>
       </form>

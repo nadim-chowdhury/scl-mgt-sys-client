@@ -13,14 +13,11 @@ export default function PaymentHistory() {
   return (
     <div>
       <Heading title="Payment History" />
-      <LoadingAndErrorMessage loading={loading} error={error} />
+      {/* <LoadingAndErrorMessage loading={loading} error={error} /> */}
 
       <div className="grid grid-cols-4 gap-6">
         {paymentsHistoryMockData?.map((payment) => (
-          <div
-            key={payment?.id}
-            className="p-4 border border-gray-300 rounded bg-amber-50"
-          >
+          <div key={payment?.id} className="p-4 border rounded-md bg-amber-50">
             <p className="text-lg">
               <strong>User:</strong> {payment?.fee?.user?.username}
             </p>
