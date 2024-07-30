@@ -75,10 +75,7 @@ export default function Subjects() {
       <Heading title="All Subjects" />
       <div className="grid grid-cols-3 gap-6">
         {subjectsDemoData?.map((subject) => (
-          <div
-            key={subject?.id}
-            className="p-4 border  rounded bg-amber-50"
-          >
+          <div key={subject?.id} className="p-4 border rounded-md bg-amber-50">
             <h3 className="font-bold">{subject?.name}</h3>
             <span>{subject?.class?.name}</span>
           </div>

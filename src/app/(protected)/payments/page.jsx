@@ -71,7 +71,7 @@ export default function Payments() {
       <Heading title="All Payments" />
       <div className="grid grid-cols-4 gap-6">
         {paymentsMockData?.map((payment) => (
-          <div key={payment?.id} className="p-4 border  rounded bg-amber-50">
+          <div key={payment?.id} className="p-4 border rounded-md bg-amber-50">
             <p className="text-lg">
               <strong>Fee:</strong> {payment?.fee?.amount}
             </p>

@@ -116,7 +116,7 @@ export default function Fees() {
       <Heading title="Created Fees" />
       <div className="grid grid-cols-4 gap-6">
         {feesMockData?.map((fee) => (
-          <div key={fee?.id} className="p-4 border  rounded bg-amber-50">
+          <div key={fee?.id} className="p-4 border rounded-md bg-amber-50">
             <p className="text-lg">
               <strong>User:</strong> {fee?.user?.username}
             </p>

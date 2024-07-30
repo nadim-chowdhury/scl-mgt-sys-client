@@ -67,7 +67,10 @@ export default function Submissions() {
       <Heading title="Recent Submissions" />
       <div className="grid grid-cols-3 gap-6">
         {submissionsDemoData?.map((submission) => (
-          <div key={submission?.id} className="p-4 border  rounded bg-amber-50">
+          <div
+            key={submission?.id}
+            className="p-4 border rounded-md bg-amber-50"
+          >
             <h2 className="text-2xl font-semibold mb-2">
               {submission?.assignment?.title}
             </h2>

@@ -105,7 +105,7 @@ export default function VirtualClasses() {
         {virtualClassesDemoData?.map((virtualClass) => (
           <div
             key={virtualClass?.id}
-            className="p-4 border  rounded bg-amber-50"
+            className="p-4 border rounded-md bg-amber-50"
           >
             <p className="mb-2">
               Meeting Link:{" "}

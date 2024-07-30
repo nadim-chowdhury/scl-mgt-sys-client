@@ -75,7 +75,7 @@ export default function Invoices() {
       <Heading title="All Invoices" />
       <div className="grid grid-cols-4 gap-6">
         {invoicesMockData?.map((invoice) => (
-          <div key={invoice?.id} className="p-4 border  rounded bg-amber-50">
+          <div key={invoice?.id} className="p-4 border rounded-md bg-amber-50">
             <p className="text-lg">
               <strong>User:</strong> {invoice?.user?.username}
             </p>
