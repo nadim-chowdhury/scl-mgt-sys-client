@@ -4,14 +4,21 @@ export const REGISTER_USER = gql`
   mutation Register($createUserInput: CreateUserInput!) {
     register(createUserInput: $createUserInput) {
       id
-      username
+      email
     }
   }
 `;
 
 export const LOGIN_USER = gql`
   mutation Login($loginInput: LoginInput!) {
-    login(loginInput: $loginInput)
+    login(loginInput: $loginInput) {
+      accessToken
+      user {
+        id
+        email
+        role
+      }
+    }
   }
 `;
 

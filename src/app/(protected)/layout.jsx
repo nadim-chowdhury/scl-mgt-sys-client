@@ -11,7 +11,7 @@ import { ProtectedRoute } from "@/lib/AuthProvider";
 
 export default function RootLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Default set to false
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Default set to false
 
   const { Header, Sider, Content } = Layout;
   const router = useRouter();
@@ -26,21 +26,21 @@ export default function RootLayout({ children }) {
   const handleLogout = () => {
     console.log("Logout clicked");
     localStorage.removeItem("scl-mgt-auth");
-    setIsLoggedIn(false);
+    // setIsLoggedIn(false);
     router.push("/login"); // Redirect to login page
   };
 
   // Check authentication status on component mount
-  useEffect(() => {
-    const authData = localStorage.getItem("scl-mgt-auth");
-    console.log("🚀 ~ useEffect ~ authData:", authData);
+  // useEffect(() => {
+  //   const authData = localStorage.getItem("scl-mgt-auth");
+  //   console.log("🚀 ~ useEffect ~ authData:", authData);
 
-    if (authData) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [pathname]); // Re-run the check when the pathname changes
+  //   if (authData) {
+  //     setIsLoggedIn(true);
+  //   } else {
+  //     setIsLoggedIn(false);
+  //   }
+  // }, [pathname]); // Re-run the check when the pathname changes
 
   // Function to handle navigation within the sidebar
   const handleMenuItemClick = (key) => {
@@ -48,7 +48,9 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <ProtectedRoute allowedRoles={["admin"]}>
+    <ProtectedRoute
+      allowedRoles={["admin", "student", "teacher", "user", "parent"]}
+    >
       <ConfigProvider
         theme={{
           token: {
@@ -142,11 +144,10 @@ export default function RootLayout({ children }) {
               }}
               className="overflow-y-scroll"
             >
-              {isLoggedIn ? (
-                children
-              ) : (
+              {children}
+              {/* {isLoggedIn ? ( ) : (
                 <p>Please log in to view this content.</p>
-              )}
+              )} */}
             </Content>
           </Layout>
         </Layout>

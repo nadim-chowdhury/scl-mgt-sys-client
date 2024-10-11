@@ -9,14 +9,39 @@ import {
   notifyError,
   notifySuccess,
 } from "../../components/common/Notifications";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "@/redux/slices/authSlice";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [login] = useMutation(LOGIN_USER);
-
+  const dispatch = useDispatch();
   const router = useRouter();
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const { data } = await login({
+  //       variables: { loginInput: { email, password } },
+  //     });
+
+  //     // Since login returns a string (the token), assign it directly
+  //     const token = data?.login;
+  //     if (token) {
+  //       notifySuccess("Login Successful");
+  //       localStorage.setItem("token", token);
+  //       router.push("/profile");
+  //     } else {
+  //       throw new Error("No token received");
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //     notifyError("Something Went Wrong");
+  //     // Remove redirect to dashboard if login fails, stay on login page
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,13 +49,25 @@ export default function Login() {
       const { data } = await login({
         variables: { loginInput: { email, password } },
       });
+
+      // Extract token and user info from response
+      // const { accessToken, user } = data?.login;
+
       notifySuccess("Login Successful");
-      localStorage.setItem("token", data.login);
+      // localStorage.setItem("token", accessToken);
+      // Optionally, store user info in localStorage or context
+      // localStorage.setItem("user", JSON.stringify(user));
+      dispatch(
+        loginSuccess({
+          accessToken: data.login.accessToken,
+          userInfo: data.login.user,
+        })
+      );
       router.push("/profile");
     } catch (err) {
       console.error(err);
       notifyError("Something Went Wrong");
-      router.push("/dashboard");
+      // Stay on login page to retry
     }
   };
 

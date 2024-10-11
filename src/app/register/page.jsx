@@ -22,15 +22,21 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register({
+      const { data } = await register({
         variables: { createUserInput: { email, password, role } },
       });
-      notifySuccess("Successfully Registered");
-      router.push("/login");
+
+      // If registration is successful
+      if (data?.register?.id) {
+        notifySuccess("Successfully Registered");
+        router.push("/login"); // Redirect to login page after successful registration
+      } else {
+        throw new Error("Registration failed");
+      }
     } catch (err) {
       console.error(err);
       notifyError("Something Went Wrong");
-      router.push("/dashboard");
+      // Stay on the same page so user can retry registration
     }
   };
 
