@@ -2,6 +2,8 @@ import { Inter } from "next/font/google";
 import "./globals.scss";
 import { ApolloWrapper } from "../lib/apollowrapper";
 import Notification from "../components/common/Notifications";
+import StoreProvider from "@/lib/StoreProvider";
+import { AuthProvider } from "@/lib/AuthProvider";
 // import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,8 +17,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ApolloWrapper>{children}</ApolloWrapper>
-        <Notification />
+        <StoreProvider>
+          <AuthProvider>
+            <ApolloWrapper>{children}</ApolloWrapper>
+            <Notification />
+          </AuthProvider>
+        </StoreProvider>
       </body>
     </html>
   );
