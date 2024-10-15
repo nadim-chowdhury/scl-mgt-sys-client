@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false); // Default set to false
   const { isAuthenticated, userInfo } = useSelector((state) => state.auth);
-  console.log("🚀 ~ RootLayout ~ userInfo:", userInfo);
+  // console.log("🚀 ~ RootLayout ~ userInfo:", userInfo);
 
   const { Header, Sider, Content } = Layout;
   const router = useRouter();
