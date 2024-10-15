@@ -396,10 +396,14 @@ import VideoPlayer from "@/components/VideoPlayer"; // Ensure VideoPlayer is imp
 import { useParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
-const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_SERVER_URL); // Ensure the correct WebSocket URL
+const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_SERVER_URL, {
+  transports: ["websocket", "polling"], // Ensure fallback to polling if websocket fails
+  withCredentials: true, // Ensure credentials are sent
+}); // Ensure the correct WebSocket URL
 
 const Classroom = () => {
   const [peers, setPeers] = useState([]);
+  console.log("🚀 ~ Classroom ~ peers:", peers);
   const userVideo = useRef();
   const peersRef = useRef([]);
   const [localStream, setLocalStream] = useState(null);
