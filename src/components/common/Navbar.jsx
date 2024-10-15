@@ -4,9 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button, Drawer, Space } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+
+  const { isAuthenticated, userInfo } = useSelector((state) => state.auth);
 
   const showDrawer = () => {
     setIsDrawerVisible(true);
@@ -22,7 +25,7 @@ export default function Navbar() {
         <div className="flex items-center">
           {/* Logo */}
           <Link href="/">
-            <span className="text-white text-[1.5rem] font-bold">SCLSYS</span>
+            <span className="text-amber-500 text-2xl font-bold">SCLSYS</span>
           </Link>
         </div>
 
@@ -121,14 +124,26 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <Link href="/login">
-            <span className="text-white py-2 font-medium text-sm">Log In</span>
-          </Link>
-          <Link href="/register">
-            <span className="bg-amber-600 text-white py-2 px-4 text-sm font-medium rounded-md hover:bg-amber-700">
-              Register
-            </span>
-          </Link>
+          {isAuthenticated ? (
+            <Link href="/dashboard">
+              <span className="bg-amber-600 text-white py-2 px-4 text-sm font-medium rounded-md hover:bg-amber-700">
+                Dashboard
+              </span>
+            </Link>
+          ) : (
+            <>
+              <Link href="/login">
+                <span className="text-white py-2 font-medium text-sm">
+                  Log In
+                </span>
+              </Link>
+              <Link href="/register">
+                <span className="bg-amber-600 text-white py-2 px-4 text-sm font-medium rounded-md hover:bg-amber-700">
+                  Register
+                </span>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

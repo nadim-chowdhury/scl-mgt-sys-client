@@ -8,15 +8,19 @@ import Link from "next/link";
 import AvatarWithLogout from "../../components/common/AvatarWithLogout";
 import { sidebarMenuItems } from "@/utils/sidebar-menu-items";
 import { ProtectedRoute } from "@/lib/AuthProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/redux/slices/authSlice";
 
 export default function RootLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false); // Default set to false
+  const { isAuthenticated, userInfo } = useSelector((state) => state.auth);
+  console.log("🚀 ~ RootLayout ~ userInfo:", userInfo);
 
   const { Header, Sider, Content } = Layout;
   const router = useRouter();
   const pathname = usePathname();
-  console.log("🚀 ~ RootLayout ~ pathname:", pathname);
+  const dispatch = useDispatch();
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -25,7 +29,8 @@ export default function RootLayout({ children }) {
   // Function to handle logging out the user
   const handleLogout = () => {
     console.log("Logout clicked");
-    localStorage.removeItem("scl-mgt-auth");
+    // localStorage.removeItem("scl-mgt-auth");
+    dispatch(logout());
     // setIsLoggedIn(false);
     router.push("/login"); // Redirect to login page
   };
@@ -128,10 +133,17 @@ export default function RootLayout({ children }) {
                 }}
               />
 
-              <AvatarWithLogout
-                username="Nadim Chowdhury"
-                onLogout={handleLogout}
-              />
+              <span
+                onClick={handleLogout}
+                className="mr-4 cursor-pointer font-medium"
+              >
+                {userInfo?.email}
+              </span>
+
+              {/* <AvatarWithLogout
+                username={userInfo?.email}
+                // onLogout={handleLogout}
+              /> */}
             </Header>
 
             <Content

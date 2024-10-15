@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import Navbar from "../common/Navbar";
+import { useSelector } from "react-redux";
 
 export default function HeroSection() {
+  const { isAuthenticated, userInfo } = useSelector((state) => state.auth);
+
   return (
     <div
       className="min-h-screen bg-cover bg-center"
@@ -19,18 +24,29 @@ export default function HeroSection() {
             communication with our all-in-one school management system.
           </p>
           <div className="space-x-4">
-            <Link
-              href="/register"
-              className="bg-amber-600 hover:bg-amber-700 text-white py-2 px-4 rounded border border-amber-600"
-            >
-              Sign Up
-            </Link>
-            <Link
-              href="/demo-request"
-              className="bg-transparent border border-white hover:bg-white hover:text-black text-white py-2 px-4 rounded"
-            >
-              Request a Demo
-            </Link>
+            {isAuthenticated ? (
+              <Link
+                href="/dashboard"
+                className="bg-amber-600 hover:bg-amber-700 text-white py-2 px-4 rounded border border-amber-600"
+              >
+                Go to Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/register"
+                  className="bg-amber-600 hover:bg-amber-700 text-white py-2 px-4 rounded border border-amber-600"
+                >
+                  Sign Up
+                </Link>
+                <Link
+                  href="/demo-request"
+                  className="bg-transparent border border-white hover:bg-white hover:text-black text-white py-2 px-4 rounded"
+                >
+                  Request a Demo
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

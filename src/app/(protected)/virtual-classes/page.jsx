@@ -7,6 +7,7 @@ import { GET_VIRTUAL_CLASSES } from "@/graphql/query";
 import Heading from "@/components/Heading";
 import LoadingAndErrorMessage from "@/components/LoadingAndErrorMessage";
 import { virtualClassesDemoData } from "@/utils/demoData";
+import Link from "next/link";
 
 export default function VirtualClasses() {
   const [meetingLink, setMeetingLink] = useState("");
@@ -108,15 +109,15 @@ export default function VirtualClasses() {
             className="p-4 border rounded-md bg-amber-50"
           >
             <p className="mb-2">
-              Meeting Link:{" "}
-              <a
-                href={virtualClass?.meetingLink}
-                target="_blank"
-                rel="noopener noreferrer"
+              Class Link:{" "}
+              <Link
+                href={`/virtual-classes/${virtualClass?.id}`}
+                // target="_blank"
+                // rel="noopener noreferrer"
                 className="text-amber-500 underline"
               >
                 Join
-              </a>
+              </Link>
             </p>
             <p className="mb-1">Schedule: {virtualClass?.schedule}</p>
             <p className="mb-1">Course: {virtualClass?.course?.name}</p>
