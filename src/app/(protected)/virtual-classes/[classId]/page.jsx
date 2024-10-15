@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import io from "socket.io-client";
 import VideoPlayer from "@/components/VideoPlayer"; // Ensure this path is correct
 import { useParams } from "next/navigation";
@@ -12,26 +12,30 @@ const Classroom = () => {
   const [isCameraEnabled, setIsCameraEnabled] = useState(true); // Track camera state
   const [localStream, setLocalStream] = useState(null);
 
-  const socketRef = useRef();
-  const localVideoRef = useRef();
+  const socketRef = useRef(null);
+  const localVideoRef = useRef(null);
   const { classId } = useParams();
-  console.log(classId);
 
   useEffect(() => {
     // Initialize WebSocket connection only on client-side
-    socketRef.current = io(process.env.NEXT_PUBLIC_WEBSOCKET_SERVER_URL);
+    socketRef.current = io(process.env.NEXT_PUBLIC_WEBSOCKET_SERVER_URL, {
+      transports: ["websocket", "polling"],
+      withCredentials: true,
+    });
 
     // Get user media (camera & microphone)
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         setLocalStream(stream);
-        localVideoRef.current.srcObject = stream;
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = stream;
+        }
 
         // Emit 'join-room' to join the class
-        socketRef.current.emit("join-room", classId); // Replace with unique class ID
+        socketRef.current.emit("join-room", classId);
       })
-      .catch((err) => console.error("Error accessing media devices", err));
+      .catch((err) => console.error("Error accessing media devices:", err));
 
     // Handle new student joining
     socketRef.current.on("user-joined", (userId) => {
@@ -39,6 +43,7 @@ const Classroom = () => {
       initiatePeerConnection(userId);
     });
 
+    // Handle offers, answers, and ICE candidates
     socketRef.current.on("offer", handleOffer);
     socketRef.current.on("answer", handleAnswer);
     socketRef.current.on("candidate", handleCandidate);
@@ -46,101 +51,116 @@ const Classroom = () => {
     return () => {
       socketRef.current.disconnect();
     };
-  }, []);
+  }, [classId]);
 
-  const initiatePeerConnection = (studentId) => {
-    const peerConnection = new RTCPeerConnection({
-      iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
-    });
+  const initiatePeerConnection = useCallback(
+    (studentId) => {
+      const peerConnection = new RTCPeerConnection({
+        iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+      });
 
-    // Add local stream tracks to the peer connection
-    localStream.getTracks().forEach((track) => {
-      peerConnection.addTrack(track, localStream);
-    });
-
-    // Handle ICE candidates
-    peerConnection.onicecandidate = (event) => {
-      if (event.candidate) {
-        socketRef.current.emit("candidate", {
-          candidate: event.candidate,
-          to: studentId,
+      // Add local stream tracks to the peer connection
+      if (localStream) {
+        localStream.getTracks().forEach((track) => {
+          peerConnection.addTrack(track, localStream);
         });
       }
-    };
 
-    // Handle incoming media stream from remote peer
-    peerConnection.ontrack = (event) => {
-      setRemoteStreams((prev) => ({
+      // Handle ICE candidates
+      peerConnection.onicecandidate = (event) => {
+        if (event.candidate) {
+          socketRef.current.emit("candidate", {
+            candidate: event.candidate,
+            to: studentId,
+          });
+        }
+      };
+
+      // Handle incoming media stream from remote peer
+      peerConnection.ontrack = (event) => {
+        setRemoteStreams((prev) => ({
+          ...prev,
+          [studentId]: event.streams[0], // Store the remote stream for the student
+        }));
+      };
+
+      // Create an offer and send to the student
+      peerConnection
+        .createOffer()
+        .then((offer) => peerConnection.setLocalDescription(offer))
+        .then(() => {
+          socketRef.current.emit("offer", { offer, to: studentId });
+        });
+
+      setPeerConnections((prev) => ({
         ...prev,
-        [studentId]: event.streams[0], // Store the remote stream for the student
+        [studentId]: peerConnection,
       }));
-    };
+    },
+    [localStream]
+  );
 
-    // Create an offer and send to the student
-    peerConnection.createOffer().then((offer) => {
-      peerConnection.setLocalDescription(offer);
-      socketRef.current.emit("offer", { offer, to: studentId });
-    });
+  const handleOffer = useCallback(
+    (data) => {
+      const peerConnection = new RTCPeerConnection({
+        iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
+      });
 
-    setPeerConnections((prev) => ({
-      ...prev,
-      [studentId]: peerConnection,
-    }));
-  };
+      peerConnection
+        .setRemoteDescription(new RTCSessionDescription(data.offer))
+        .then(() => {
+          if (localStream) {
+            localStream.getTracks().forEach((track) => {
+              peerConnection.addTrack(track, localStream);
+            });
+          }
+        })
+        .then(() => peerConnection.createAnswer())
+        .then((answer) => peerConnection.setLocalDescription(answer))
+        .then(() => {
+          socketRef.current.emit("answer", { answer, to: data.from });
+        });
 
-  const handleOffer = (data) => {
-    const peerConnection = new RTCPeerConnection({
-      iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
-    });
+      peerConnection.ontrack = (event) => {
+        setRemoteStreams((prev) => ({
+          ...prev,
+          [data.from]: event.streams[0],
+        }));
+      };
 
-    // Set the received offer as remote description
-    peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer));
-
-    // Add local stream tracks
-    localStream.getTracks().forEach((track) => {
-      peerConnection.addTrack(track, localStream);
-    });
-
-    // Create and send an answer
-    peerConnection.createAnswer().then((answer) => {
-      peerConnection.setLocalDescription(answer);
-      socketRef.current.emit("answer", { answer, to: data.from });
-    });
-
-    // Handle remote stream from peer
-    peerConnection.ontrack = (event) => {
-      setRemoteStreams((prev) => ({
+      setPeerConnections((prev) => ({
         ...prev,
-        [data.from]: event.streams[0],
+        [data.from]: peerConnection,
       }));
-    };
+    },
+    [localStream]
+  );
 
-    setPeerConnections((prev) => ({
-      ...prev,
-      [data.from]: peerConnection,
-    }));
-  };
+  const handleAnswer = useCallback(
+    (data) => {
+      const peerConnection = peerConnections[data.from];
+      if (peerConnection) {
+        peerConnection.setRemoteDescription(
+          new RTCSessionDescription(data.answer)
+        );
+      }
+    },
+    [peerConnections]
+  );
 
-  const handleAnswer = (data) => {
-    const peerConnection = peerConnections[data.from];
-    if (peerConnection) {
-      peerConnection.setRemoteDescription(
-        new RTCSessionDescription(data.answer)
-      );
-    }
-  };
-
-  const handleCandidate = (data) => {
-    const peerConnection = peerConnections[data.from];
-    if (peerConnection) {
-      peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
-    }
-  };
+  const handleCandidate = useCallback(
+    (data) => {
+      const peerConnection = peerConnections[data.from];
+      if (peerConnection) {
+        peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
+      }
+    },
+    [peerConnections]
+  );
 
   // Toggle microphone
   const toggleMic = () => {
     if (localStream) {
-      // Ensure localStream is available
       const audioTrack = localStream
         .getTracks()
         .find((track) => track.kind === "audio");
@@ -148,15 +168,12 @@ const Classroom = () => {
         audioTrack.enabled = !isMicEnabled;
         setIsMicEnabled(!isMicEnabled);
       }
-    } else {
-      console.error("Local stream is not available.");
     }
   };
 
   // Toggle camera
   const toggleCamera = () => {
     if (localStream) {
-      // Ensure localStream is available
       const videoTrack = localStream
         .getTracks()
         .find((track) => track.kind === "video");
@@ -164,26 +181,25 @@ const Classroom = () => {
         videoTrack.enabled = !isCameraEnabled;
         setIsCameraEnabled(!isCameraEnabled);
       }
-    } else {
-      console.error("Local stream is not available.");
     }
   };
 
   return (
     <div className="flex flex-col space-y-4">
       <h1 className="text-3xl font-bold text-gray-800">Virtual Classroom</h1>
+
       {/* Local video stream */}
       <div className="w-full md:w-1/2 lg:w-1/3">
         <video
-          id="localVideo"
           ref={localVideoRef}
           autoPlay
           playsInline
-          muted // Ensure your own audio is muted to avoid feedback
+          muted // Avoid audio feedback loop
           className="rounded-lg w-full h-auto"
         ></video>
       </div>
-      {/* Buttons for toggling mic and camera */}
+
+      {/* Toggle buttons */}
       <div className="space-x-4">
         {localStream ? (
           <>
@@ -205,7 +221,7 @@ const Classroom = () => {
         )}
       </div>
 
-      {/* Render remote students dynamically */}
+      {/* Remote students' videos */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {Object.keys(remoteStreams).map((studentId) => (
           <VideoPlayer
