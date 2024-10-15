@@ -19,7 +19,7 @@ const Classroom = () => {
   useEffect(() => {
     // Initialize WebSocket connection only on client-side
     socketRef.current = io(process.env.NEXT_PUBLIC_WEBSOCKET_SERVER_URL, {
-      transports: ["websocket"],
+      transports: ["websocket", "polling"],
       withCredentials: true,
     });
 
